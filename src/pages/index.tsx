@@ -15,7 +15,7 @@ export default function Home() {
         {/* open graph */}
         <meta property="og:title" content="GPA Calculator | For Universities and Polytechnics in Singapore" />
         <meta property="og:description" content="Calculate your GPA easily with our user-friendly GPA calculator, designed specifically for students in universities and polytechnics across Singapore." />
-        <meta property="og:image" content="/images/og-image.jpg" />
+        <meta property="og:image" content="/images/og_image.jpg" />
         <meta property="og:url" content="http://www.plsgrade.me" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="PlsGradeMe" />
@@ -23,7 +23,7 @@ export default function Home() {
         {/* twitter */}
         <meta name="twitter:title" content="GPA Calculator | For Universities and Polytechnics in Singapore" />
         <meta name="twitter:description" content="Calculate your GPA easily with our user-friendly GPA calculator, designed specifically for students in universities and polytechnics across Singapore." />
-        <meta name="twitter:image" content="/images/twitter-image.jpg" />
+        <meta name="twitter:image" content="/images/twitter_image.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="telephone" content="+65 9116 8420" />
 
