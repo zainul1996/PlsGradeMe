@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-159582331-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "UA-159582331-1");
+  </script>
+  <script data-ad-client="ca-pub-6368163536046497" async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+  <title>GPA Calculator | For Universities and Polytechnics in Singapore</title>
+  <meta name="description"
+    content="GPA Calculator and Planner for Universitites and Polytechnics. Allows you to calculate your GPA and set goals for your next semester/trimester">
+  <!-- favicon -->
+  <link rel="shortcut icon" href="favicon.ico">
+  <meta name="viewport" content="width=device-width, maximum-scale=1" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+  <style type="text/css">
+    .ui.form {
+      padding-top: 1rem;
+      padding-right: 1rem;
+    }
+
+    .ui.grid {
+      padding-top: 0.5rem;
+    }
+
+    .ui.small.image,
+    .ui.small.images .image,
+    .ui.small.images img,
+    .ui.small.images svg {
+      height: 60px;
+      width: auto;
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+
+    .sch-logo-border:hover {
+      box-sizing: border-box;
+      display: inline-block;
+      border: 1px solid #ccc;
+      padding: 10px 10px;
+    }
+
+    .sch-logo-border {
+      box-sizing: border-box;
+      display: inline-block;
+      border: 0px solid #ccc;
+      padding: 10px 10px;
+    }
+
+    .sch-logo-border.clicked {
+      border: 1px solid red;
+    }
+
+    h2.row.header.target {
+      padding: 1rem;
+    }
+
+    #optional-title {
+      display: inline-block;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    .main {
+      flex: 1;
+    }
+
+    .ui.link.list.list .active.item,
+    .ui.link.list.list .active.item a:not(.ui) {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer {
+      padding-bottom: 2em !important;
+    }
+
+    .test {
+      border-radius: 0.28571429rem !important;
+      border: 1px solid rgba(34, 36, 38, 0.15) !important;
+      -webkit-box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15) !important;
+      box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15) !important;
+      padding: 1em 1em !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ui main container">
+    <div id="courses" class="ui vertical segment">
+      <h1 class="ui header">GPA Calculator/Planner</h1>
+      <h2 id="school-title" class="ui header">Pick Your School</h2>
+      <div class="ui grid">
+        <div id="schools" class="row">
+          <div class="two wide computer five wide tablet column sch-logo-border school" onclick="selectSchool(this)">
+            <img class="sch-logo" alt="NUS" src="img/NUS.jpg" />
+          </div>
+          <div class="two wide computer five wide tablet column sch-logo-border school" onclick="selectSchool(this)">
+            <img class="sch-logo" alt="NTU" src="img/NTU.jpg" />
+          </div>
+          <div class="two wide computer five wide tablet column sch-logo-border school" onclick="selectSchool(this)">
+            <img class="sch-logo" alt="SIT" src="img/SIT.jpg" />
+          </div>
+          <div class="two wide computer five wide tablet column sch-logo-border school" onclick="selectSchool(this)">
+            <img class="sch-logo" alt="SMU" src="img/SMU.jpg" />
+          </div>
+          <div class="two wide computer five wide tablet column sch-logo-border school" onclick="selectSchool(this)">
+            <img class="sch-logo" alt="SUSS" src="img/SUSS.jpg" />
+          </div>
+          <div class="two wide computer five wide tablet column sch-logo-border school" onclick="selectSchool(this)">
+            <img class="sch-logo" alt="SUTD" src="img/SUTD.jpg" />
+          </div>
+          <div class="two wide computer five wide tablet column sch-logo-border school" onclick="selectSchool(this)">
+            <img class="sch-logo" alt="Poly" src="img/AllPoly.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui vertical segment">
+      <h3 id="optional-title" class="ui header">
+        GPA and Total Credits Taken Thus Far (Optional)
+      </h3>
+      <i class="question circle large icon" data-position="right center"> </i>
+      <div class="ui custom popup top left transition hidden">
+        <p>
+          <b>Fill this section if you want to include ur previous results</b>
+        </p>
+        <p>GPA = Your current cGPA</p>
+        <p>Credits = Sum of all your past module credits</p>
+      </div>
+      <div class="ui grid" id="optionals">
+        <div class="row">
+          <div class="field">
+            <div class="ui left floated column labeled input" style="padding: 0.5em">
+              <label for="prevGPA" class="ui label">Current GPA</label>
+              <input onInput="calculateGPA()" type="text" class="previous" maxlength="5" value="" id="prevGPA"
+                placeholder="Enter GPA" />
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left floated column labeled input" style="padding: 0.5em">
+              <label for="prevCred" class="ui label">Total Credits</label>
+              <input onInput="calculateGPA()" type="text" class="previous" maxlength="3" id="prevCred"
+                placeholder="Enter Total Credits" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui top attached tabular menu">
+      <a class="active item cgpa" data-tab="first">Calculate cGPA</a>
+      <a class="item target" data-tab="second">Calculate Target GPA</a>
+    </div>
+    <div class="ui bottom attached active tab segment" data-tab="first">
+      <div class="ui vertical segment">
+        <button onclick="addModuleButtonClicked()" class="ui secondary button">
+          Add Module
+        </button>
+        <form onchange="calculateGPA()" onInput="calculateGPA()" class="ui form modules"></form>
+      </div>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="second">
+      <div class="ui grid target">
+        <div class="row target">
+          <div class="field">
+            <div class="ui left floated column labeled input" style="padding: 0.5em">
+              <label for="nextGPA" class="ui label">Targetted GPA</label>
+              <input onInput="targetGPACalculate()" type="text" class="target" maxlength="5" value="" id="nextGPA"
+                placeholder="What Is Your Goal" />
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left floated column labeled input" style="padding: 0.5em">
+              <label for="nextCred" class="ui label">Next Sem Total Credits</label>
+              <input onInput="targetGPACalculate()" type="text" class="target" maxlength="3" id="nextCred"
+                placeholder="Enter Total Credits" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui container segment">
+    <h2 class="ui header">How is GPA Calculated ?</h2>
+    <p>In order to calculate GPA, we would first need the following 3 components:</p>
+    <ol class="ui list">
+      <li>Total Credits: Total Credits earned over all the modules taken</li>
+      <li>Module Grade: Individual grade of all the modules you have taken</li>
+      <li>Module Credit: Individual credit of all the module you have taken</li>
+    </ol>
+    <img class="ui medium bordered image large" alt="gpa formula"
+      src="https://cdn.discordapp.com/attachments/889476622149910541/896571507495550996/gpa_formula.png">
+  </div>
+  <div class="ui inverted vertical footer segment">
+    <div class="ui center aligned container">
+      <div class="ui stackable inverted divided grid">
+        <div class="five wide column">
+          <h4 class="ui inverted header">Schools</h4>
+          <div class="ui inverted link list">
+            <div class="ui inverted accordion">
+              <div class="ui item title">
+                <i class="dropdown icon"></i>
+                Universities
+              </div>
+              <div class="ui content inverted link list">
+                <a href="https://www.singaporetech.edu.sg" class="transition hidden item">Singapore Institute of
+                  Technology</a>
+                <a href="http://www.nus.edu.sg" class="transition hidden item">National University of Singapore</a>
+                <a href="https://www.ntu.edu.sg" class="transition hidden item">Nanyang Technological University</a>
+                <a href="https://www.smu.edu.sg" class="transition hidden item">Singapore Management University</a>
+                <a href="http://sutd.edu.sg" class="transition hidden item">Singapore University of Technology and
+                  Design</a>
+                <a href="http://suss.edu.sg" class="transition hidden item">Singapore Univeristy of Social Sciences</a>
+              </div>
+            </div>
+            <div class="ui inverted accordion">
+              <div class="ui item title">
+                <i class="dropdown icon"></i>
+                Polytechnics
+              </div>
+              <div class="ui content inverted link list">
+                <a href="http://sp.edu.sg" class="transition hidden item">Singapore Polytechnic</a>
+                <a href="http://www.np.edu.sg" class="transition hidden item">Ngee Ann Polytechnic</a>
+                <a href="http://tp.edu.sg" class="transition hidden item">Temasek Polytechnic</a>
+                <a href="http://nyp.edu.sg" class="transition hidden item">Nanyang Polytechnic</a>
+                <a href="http://rp.edu.sg" class="transition hidden item">Republic Polytechnic</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="four wide column">
+          <h4 class="ui inverted header">More Information</h4>
+          <div class="ui inverted link list">
+            <a href="#" class="item">GPA System</a>
+          </div>
+        </div>
+        <div class="seven wide column">
+          <h4 class="ui inverted header">Developed by Zainul</h4>
+          <a href="https://www.linkedin.com/in/zainul1996/" class="ui circular linkedin icon button">
+            <i class="linkedin icon"></i>
+          </a>
+          <a href="mailto:zainul1996@gmail.com" class="ui circular google plus icon button">
+            <i class="google icon"></i>
+          </a>
+          <a href="https://t.me/pythondev" class="ui circular twitter icon button">
+            <i class="telegram icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  jsonData = "";
+  function getGradeTemplate(grade, point) {
+    return (
+      `<div class="item" data-value="` +
+      point +
+      `">
+					<img class="ui mini avatar image" src="img/grade.jpg">
+					` +
+      grade +
+      `
+				</div>`
+    );
+  }
+
+  function getGradingForSchool(school) {
+    var filledTemplate = "";
+    jsonData[school].forEach(function (record) {
+      filledTemplate += getGradeTemplate(record.Grade, record.Point);
+    });
+    return filledTemplate;
+  }
+
+  selectedSchool = "None";
+  let SITGradingTypes = `<div class="six column row">
+								<div class="two wide computer five wide tablet column sch-logo-border grading" onclick="selectGrading(this)">
+										<img class="sch-logo" alt="TUM" src="img/TUM.png">
+								</div>
+								<div class="two wide computer five wide tablet column sch-logo-border grading" onclick="selectGrading(this)">
+										<img class=".sch-logo" alt="DP" src="img/DigiPen.jpg">
+								</div>
+								<div class="two wide computer five wide tablet column sch-logo-border grading" onclick="selectGrading(this)">
+										<img class=".sch-logo" alt="SIT" src="img/SIT.jpg">
+								</div>
+							</div>`;
+
+  let PolyGradingTypes = `<div class="six column row">
+								<div class="two wide computer five wide tablet column sch-logo-border grading" onclick="selectGrading(this)">
+										<img class="sch-logo" alt="SP" src="img/SP.jpg">
+								</div>
+								<div class="two wide computer five wide tablet column sch-logo-border grading" onclick="selectGrading(this)">
+										<img class=".sch-logo" alt="NP" src="img/NP.jpg">
+								</div>
+								<div class="two wide computer five wide tablet column sch-logo-border grading" onclick="selectGrading(this)">
+										<img class=".sch-logo" alt="TP" src="img/TP.jpg">
+								</div>
+								<div class="two wide computer five wide tablet column sch-logo-border grading" onclick="selectGrading(this)">
+										<img class=".sch-logo" alt="NYP" src="img/NYP.jpg">
+								</div>
+								<div class="two wide computer five wide tablet column sch-logo-border grading" onclick="selectGrading(this)">
+										<img class=".sch-logo" alt="RP" src="img/RP.jpg">
+								</div>
+							</div>`;
+
+  function addModuleField(gradingTemplate) {
+    $moduleFields =
+      `
+			<div class="ui transparent input">
+				<input type="text" class="name" value="Edit Module Name">
+			</div>
+			<div class="ui two column grid">
+				<div class="field column">
+					<div class="ui fluid selection dropdown grade">
+						<input type="hidden" value="3.0">
+						<i class="dropdown icon"></i>
+						<div class="default text">Select Grade</div>
+						<div class="menu">
+							` +
+      gradingTemplate +
+      `
+						</div>
+					</div>
+				</div>	
+				<div class="field column">
+					<div class="ui labeled fluid input">
+						<label for="nextCred" class="ui label">Credits</label>
+						<input type="text" class="credit" maxlength="4" value="5">
+					</div>
+				</div>
+			</div>`;
+    $(".ui.form").append($moduleFields);
+    calculateGPA();
+  }
+
+  function addModuleButtonClicked() {
+    if (isSchoolSelected()) {
+      let selectedOption = getSchoolSelected();
+      if (selectedOption == "SIT" || selectedOption == "Poly") {
+        if (isGradingSelected()) {
+          selectedOption = getGradingSelected();
+        } else {
+          selectedOption = null;
+          alertPickGrade();
+        }
+      }
+      addModuleField(getGradingForSchool(selectedOption));
+    } else {
+      alertPickSchool();
+    }
+  }
+
+  function addModule(selectedOption) {
+    addModuleField(getGradingForSchool(selectedOption));
+  }
+
+  function selectSchool(e) {
+    if (!$(e).hasClass("clicked")) {
+      removeGrading();
+      removeModules();
+      $("#schools").children().removeClass("clicked");
+      $(e).addClass("clicked");
+
+      let schoolName = getSchoolSelected();
+      if (schoolName == "SIT") {
+        insertGrading(SITGradingTypes);
+      } else if (schoolName == "Poly") {
+        insertGrading(PolyGradingTypes);
+      } else {
+        let schoolName = $(e).children("img").attr("alt");
+        addModule(schoolName);
+      }
+    }
+  }
+  function selectGrading(e) {
+    if (!$(e).hasClass("clicked")) {
+      removeModules();
+      $("#gradings").children().children().removeClass("clicked");
+      $(e).addClass("clicked");
+      let gradingName = $(e).children("img").attr("alt");
+      addModule(gradingName);
+    }
+  }
+
+  function calculateGPA() {
+    if (isSchoolSelected()) {
+      let selectedOption = getSchoolSelected();
+      if (selectedOption == "SIT" || selectedOption == "Poly") {
+        if (isGradingSelected()) {
+          selectedOption = getGradingSelected();
+        } else {
+          selectedOption = null;
+          alertPickGrade();
+        }
+      }
+      if (selectedOption) {
+        let moduleNames = [],
+          moduleGrades = [],
+          moduleCredits = [];
+        let $form = $(".ui.form");
+        $form.find(".name").each(function () {
+          moduleNames.push($(this).val());
+        });
+        $form.find(".grade").each(function () {
+          moduleGrades.push($(this).dropdown("get value"));
+        });
+        $form.find(".credit").each(function () {
+          moduleCredits.push($(this).val());
+        });
+        currentResults = moduleNames.map(
+          function (x, i) {
+            return {
+              name: x,
+              grade: moduleGrades[i],
+              credit: moduleCredits[i],
+            };
+          }.bind(this)
+        );
+
+        aggregate = 0;
+        totalCredits = 0;
+        $(currentResults).each(function () {
+          aggregate += this.grade * this.credit;
+          totalCredits += parseFloat(this.credit);
+        });
+
+        prevGPA = 0;
+        prevCred = 0;
+        if (isPreviousGradeValid() && isPreviousGradeFilled()) {
+          previousGrade = getPreviousGrade();
+          prevGPA = previousGrade.GPA;
+          prevCred = previousGrade.Credits;
+        }
+
+        currentGPA = parseFloat(
+          (
+            (aggregate + prevGPA * prevCred) /
+            (totalCredits + prevCred)
+          ).toFixed(4)
+        );
+
+        $(".updatedGPA").remove();
+        if (Number.isNaN(currentGPA)) {
+          $(".ui.form").append(
+            `<h2 class="ui header updatedGPA">Invalid Entry !</h2><p class="updatedGPA">Maybe you left a blank somewhere</p>`
+          );
+        } else {
+          $(".ui.form").append(
+            `<h2 class="ui header updatedGPA">Your GPA: ` +
+            currentGPA +
+            `</h2>`
+          );
+        }
+      }
+    } else {
+      alertPickSchool();
+    }
+  }
+
+  function isSchoolSelected() {
+    return $("#schools").find(".clicked").length == 1;
+  }
+
+  function getSchoolSelected() {
+    return $("#schools").find(".clicked").children("img").attr("alt");
+  }
+
+  function isGradingSelected() {
+    return $("#gradings").find(".clicked").length == 1;
+  }
+
+  function getGradingSelected() {
+    return $("#gradings").find(".clicked").children("img").attr("alt");
+  }
+
+  function isPreviousGradeFilled() {
+    let prevCred = $("#prevCred").val().trim();
+    let prevGPA = $("#prevGPA").val().trim();
+    if (prevCred > 0 && prevGPA.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function isPreviousGradeValid() {
+    let prevCred = parseFloat($("#prevCred").val());
+    let prevGPA = parseFloat($("#prevGPA").val());
+    if (!Number.isNaN(prevCred) && !Number.isNaN(prevGPA)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function getPreviousGrade() {
+    let prevCred = parseFloat($("#prevCred").val());
+    let prevGPA = parseFloat($("#prevGPA").val());
+    if (!Number.isNaN(prevCred) && !Number.isNaN(prevGPA)) {
+      return { GPA: prevGPA, Credits: prevCred };
+    } else {
+      false;
+    }
+  }
+
+  function isNextGradeFilled() {
+    let nextCred = $("#nextCred").val().trim();
+    let nextGPA = $("#nextGPA").val().trim();
+    if (nextCred > 0 && nextGPA.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function isNextGradeValid() {
+    let nextCred = parseFloat($("#nextCred").val());
+    let nextGPA = parseFloat($("#nextGPA").val());
+    if (!Number.isNaN(nextCred) && !Number.isNaN(nextGPA)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function getNextGrade() {
+    let nextCred = parseFloat($("#nextCred").val());
+    let nextGPA = parseFloat($("#nextGPA").val());
+    if (!Number.isNaN(nextCred) && !Number.isNaN(nextGPA)) {
+      return { GPA: nextGPA, Credits: nextCred };
+    } else {
+      false;
+    }
+  }
+
+  function alertPickGrade() {
+    $("#grading-title, #gradings")
+      .removeClass("animate__animated animate__fadeIn")
+      .addClass("animate__animated animate__headShake");
+    setTimeout(function () {
+      $("#grading-title, #gradings").removeClass(
+        "animate__animated animate__headShake"
+      );
+    }, 400);
+  }
+
+  function alertPickSchool() {
+    $("#school-title, #schools").addClass(
+      "animate__animated animate__headShake"
+    );
+    setTimeout(function () {
+      $("#school-title, #schools").removeClass(
+        "animate__animated animate__headShake"
+      );
+    }, 400);
+  }
+
+  function alertFillPreviousGrade() {
+    $("#optional-title, #optionals").addClass(
+      "animate__animated animate__headShake"
+    );
+    setTimeout(function () {
+      $("#optional-title, #optionals").removeClass(
+        "animate__animated animate__headShake"
+      );
+    }, 400);
+  }
+
+  function insertGrading(gradeOptions) {
+    $("#courses").append(
+      `<h2 id="grading-title" class="ui header animate__animated  animate__fadeIn">Which Grading System</h2>
+			<div id="gradings" class="ui grid animate__animated  animate__fadeIn">
+					` +
+      gradeOptions +
+      `
+			</div>`
+    );
+  }
+
+  function removeGrading() {
+    $("#grading-title, #gradings")
+      .removeClass("animate__animated animate__fadeIn animate__headShake")
+      .addClass("animate__animated animate__zoomOut");
+    $("#grading-title, #gradings").remove();
+  }
+
+  function removeModules() {
+    $(".modules").children().remove();
+  }
+
+  function targetGPACalculate() {
+    if (isSchoolSelected()) {
+      let selectedOption = getSchoolSelected();
+      if (selectedOption == "SIT" || selectedOption == "Poly") {
+        if (isGradingSelected()) {
+          selectedOption = getGradingSelected();
+        } else {
+          selectedOption = null;
+          alertPickGrade();
+        }
+      }
+      if (selectedOption) {
+        if (isPreviousGradeValid() && isPreviousGradeFilled()) {
+          if (isNextGradeValid() && isNextGradeFilled()) {
+            prevGPA = getPreviousGrade().GPA;
+            prevCred = getPreviousGrade().Credits;
+            nextGPA = getNextGrade().GPA;
+            nextCred = getNextGrade().Credits;
+            let goalGPA = parseFloat(
+              (
+                (nextGPA * (prevCred + nextCred) - prevGPA * prevCred) /
+                nextCred
+              ).toFixed(4)
+            );
+            console.log(selectedOption);
+            grades = jsonData[selectedOption];
+            maxGrade = jsonData[selectedOption][0].Point;
+            minGrade = jsonData[selectedOption][grades.length - 1].Point;
+
+            $("h2.target").remove();
+            console.log(goalGPA);
+            console.log(minGrade);
+            console.log(maxGrade);
+            if (goalGPA >= minGrade && goalGPA <= maxGrade) {
+              $(".grid.target").append(
+                `<h2 class="ui row header target">What you need: ` +
+                goalGPA +
+                `</h2>`
+              );
+            } else {
+              $(".grid.target").append(
+                `<h2 class="ui row header target">You need more than 1 Semester to achieve that goal. You can do it ! </h2>`
+              );
+            }
+          }
+        } else {
+          if (!$("#prevGPA").is(":focus") && !$("#prevCred").is(":focus")) {
+            alertFillPreviousGrade();
+          }
+        }
+      }
+    } else {
+      alertPickSchool();
+    }
+  }
+
+  $(document).ready(function () {
+    $(".ui.dropdown").dropdown();
+    $(".menu .item").tab();
+
+    $(".top.menu .target").tab({
+      onVisible: function () {
+        $("#optional-title").text(
+          "GPA and Total Credits Taken Thus Far (Required)"
+        );
+        $("#prevGPA").attr({ onInput: "targetGPACalculate()" });
+        $("#prevCred").attr({ onInput: "targetGPACalculate()" });
+      },
+    });
+
+    $(".top.menu .cgpa").tab({
+      onVisible: function () {
+        $("#optional-title").text(
+          "GPA and Total Credits Taken Thus Far (Optional)"
+        );
+        $("#prevGPA").attr({ onInput: "calculateGPA()" });
+        $("#prevCred").attr({ onInput: "calculateGPA()" });
+        calculateGPA();
+      },
+    });
+
+    $.getJSON(
+      "https://api.jsonbin.io/v3/b/5ed0171f79382f568bceb99d/latest",
+      function (data) {
+        jsonData = data.record;
+      }
+    );
+
+    $(".question").popup({
+      popup: $(".custom.popup"),
+      on: "click",
+    });
+
+    $(".ui.accordion").accordion();
+  });
+</script>
+
+</html>
