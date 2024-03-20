@@ -83,11 +83,11 @@ export default function Home() {
       </Head>
       <Layout>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 mt-6">
+          <div className="grid lg:grid-cols-2 gap-12 mt-6 bg-white dark:bg-slate-800">
             <SchoolSelectSection />
             <CurrentGPASection />
           </div>
-          <div className="mt-6 w-full bg-gray-50">
+          <div className="mt-6 w-full bg-gray-50 rounded-md p-4">
 
             <Tabs defaultValue="calculate_cgpa" className="mx-auto">
               <TabsList className="flex justify-evenly">
