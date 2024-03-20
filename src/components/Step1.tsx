@@ -51,9 +51,13 @@ function classNames(...classes: (string | boolean)[]) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Step1() {
+interface Step1Props {
+    school: string;
+    setSchool: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function Step1({ school, setSchool }: Step1Props) {
     const [query, setQuery] = useState('')
-    const [selectedPerson, setSelectedPerson] = useState(null)
 
     const filteredPeople =
         query === ''
@@ -63,7 +67,7 @@ export default function Step1() {
             })
 
     return (
-        <Combobox as="div" value={selectedPerson} onChange={setSelectedPerson}>
+        <Combobox as="div" value={school} onChange={setSchool}>
             <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">1. Select School</Combobox.Label>
             <div className="relative mt-2">
                 <Combobox.Input

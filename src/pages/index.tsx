@@ -1,13 +1,19 @@
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import Layout from "@components/layout";
-import Step1 from "@components/comboBoxWithImage";
+import Step1 from "@components/Step1";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@components/ui/tabs";
 import { Button } from "../../@components/ui/button";
+import Step2 from "@components/Step2";
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [school, setSchool] = useState<string | null>(null)
+  const [currentGPA, setCurrentGPA] = useState<number | null>(null)
+  const [currentCredits, setCurrentCredits] = useState<number | null>(null)
+
   return (
     <>
       <Head>
@@ -42,36 +48,8 @@ export default function Home() {
       <Layout>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 mt-6">
-            <Step1 />
-            <fieldset className="bg-white">
-              <legend className="block text-sm font-medium leading-6 text-gray-900">2. Current Results(Optional)</legend>
-              <div className="isolate -space-y-px rounded-md shadow-sm">
-                <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-                  <label htmlFor="name" className="block text-xs font-medium text-gray-900">
-                    Current GPA
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder="3.25"
-                  />
-                </div>
-                <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-                  <label htmlFor="job-title" className="block text-xs font-medium text-gray-900">
-                    Current Credits
-                  </label>
-                  <input
-                    type="text"
-                    name="job-title"
-                    id="job-title"
-                    className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder="130"
-                  />
-                </div>
-              </div>
-            </fieldset>
+            <Step1 school={school} setSchool={setSchool} />
+            <Step2 currentGPA={currentGPA} setCurrentGPA={setCurrentGPA} currentCredits={currentCredits} setCurrentCredits={setCurrentCredits} />
           </div>
           <div className="mt-6 w-full bg-gray-50">
             <Tabs defaultValue="account" className="mx-auto">
