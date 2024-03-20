@@ -20,16 +20,24 @@ These instructions will help you set up the project on your local machine for de
 ### Installation
 
 1. Clone the repository:
+```<bash>
 git clone https://github.com/your-username/PlsGradeMe.git
+```
 
 2. Change into the project directory:
+```<bash>
 cd PlsGradeMe
+```
 
 3. Install the dependencies:
+```<bash>
 npm install
+```
 
 4. Start the development server:
+```<bash>
 npm start
+```
 
 5. Open your browser and navigate to `http://localhost:3000` to view the application.
 
