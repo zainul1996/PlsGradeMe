@@ -1,9 +1,6 @@
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import Layout from "@components/layout";
-import SelectWithImage from "@components/selectWithImage";
-import Stepper from "@components/steps";
-import ComboBoxWithImage from "@components/comboBoxWithImage";
 import Step1 from "@components/comboBoxWithImage";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@components/ui/tabs";
 import { Button } from "../../@components/ui/button";
