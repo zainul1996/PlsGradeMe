@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { useFormik } from 'formik';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
 import { useEffect } from 'react';
+import { classNames } from '@components/layout';
 
 const currentGPASectionSchema = z.object({
   currentGPA: z.coerce.number({
@@ -19,7 +20,7 @@ const currentGPASectionSchema = z.object({
 
 export default function CurrentGPASection() {
 
-  const { currentGPA, currentCredits, setCurrentGPA, setCurrentCredits } = useGPAContext();
+  const { school, currentGPA, currentCredits, setCurrentGPA, setCurrentCredits } = useGPAContext();
 
   const {
     values,
@@ -55,8 +56,8 @@ export default function CurrentGPASection() {
   }, [values, isValid]);
 
   return (
-    <fieldset className="bg-white">
-      <legend className="block text-sm font-medium leading-6 text-gray-900">2. Current Results(Optional)</legend>
+    <fieldset className={classNames(!school ? 'opacity-40' : 'opacity-100' , 'bg-white transition-all')}>
+      <legend className="block text-sm font-medium leading-6 text-gray-900">2. Current Results (Optional)</legend>
       <div className="isolate -space-y-px rounded-md shadow-sm">
         <div
           className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
@@ -64,10 +65,11 @@ export default function CurrentGPASection() {
             Current GPA
           </label>
           <input
+            disabled={!school}
             type="text"
             name="Current GPA"
             id="current_gpa"
-            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 disabled:cursor-not-allowed"
             placeholder="3.25"
             value={values.currentGPA || ''}
             onChange={(e) => setFieldValue('currentGPA', e.target.value.trim())}
@@ -85,10 +87,11 @@ export default function CurrentGPASection() {
             Current Credits
           </label>
           <input
+            disabled={!school}
             type="text"
             name="Current Credits"
             id="current_credits"
-            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 disabled:cursor-not-allowed"
             placeholder="130"
             value={values.currentCredits || ''}
             onChange={(e) => setFieldValue('currentCredits', e.target.value.trim())}
