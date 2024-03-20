@@ -4,7 +4,8 @@ import Layout from '@components/layout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import { Inter } from 'next/font/google';
 import Head from 'next/head';
-import { Button } from '../../@components/ui/button';
+import CalculateCGPATab from '@components/CalculateCGPATab';
+import CalculateTargetGPATab from '@components/CalculateTargetGPATab';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -87,20 +88,20 @@ export default function Home() {
             <CurrentGPASection />
           </div>
           <div className="mt-6 w-full bg-gray-50">
-            <Tabs defaultValue="account" className="mx-auto">
+
+            <Tabs defaultValue="calculate_cgpa" className="mx-auto">
               <TabsList className="flex justify-evenly">
-                <TabsTrigger value="account">Calculate cGPA</TabsTrigger>
-                <TabsTrigger value="password">Calculate Target GPA</TabsTrigger>
+                <TabsTrigger value="calculate_cgpa">Calculate cGPA</TabsTrigger>
+                <TabsTrigger value="calculate_target_gpa">Calculate Target GPA</TabsTrigger>
               </TabsList>
-              <TabsContent value="account">
-                <Button className="ml-4 my-4 bg-black text-white">
-                  Add module
-                </Button>
+              <TabsContent value="calculate_cgpa">
+                <CalculateCGPATab />
               </TabsContent>
-              <TabsContent value="password">
-                Change your password here.
+              <TabsContent value="calculate_target_gpa">
+                <CalculateTargetGPATab />
               </TabsContent>
             </Tabs>
+
           </div>
         </div>
       </Layout>
