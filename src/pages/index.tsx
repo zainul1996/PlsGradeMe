@@ -1,17 +1,26 @@
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import Layout from "@components/layout";
+import Step1 from "@components/Step1";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@components/ui/tabs";
+import { Button } from "../../@components/ui/button";
+import Step2 from "@components/Step2";
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [school, setSchool] = useState<null|string>(null)
+  const [currentGPA, setCurrentGPA] = useState<number | null>(null)
+  const [currentCredits, setCurrentCredits] = useState<number | null>(null)
+
   return (
     <>
       <Head>
         <title>GPA Calculator | For Universities and Polytechnics in Singapore</title>
         <meta name="description" content="Calculate your GPA easily with our user-friendly GPA calculator, designed specifically for students in universities and polytechnics across Singapore." />
         <meta name="keywords" content="GPA calculator, Singapore universities, Singapore polytechnics, cumulative GPA, semester GPA, target GPA" />
-        
+
         {/* open graph */}
         <meta property="og:title" content="GPA Calculator | For Universities and Polytechnics in Singapore" />
         <meta property="og:description" content="Calculate your GPA easily with our user-friendly GPA calculator, designed specifically for students in universities and polytechnics across Singapore." />
@@ -37,7 +46,25 @@ export default function Home() {
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <Layout>
-        <h1 className="text-4xl font-bold text-center">Welcome to PlsGradeMe</h1>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 mt-6">
+            <Step1 school={school} setSchool={setSchool} />
+            <Step2 />
+          </div>
+          <div className="mt-6 w-full bg-gray-50">
+            <Tabs defaultValue="account" className="mx-auto">
+              <TabsList className="flex justify-evenly">
+                <TabsTrigger value="account">Calculate cGPA</TabsTrigger>
+                <TabsTrigger value="password">Calculate Target GPA</TabsTrigger>
+              </TabsList>
+              <TabsContent value="account">
+                <Button className="ml-4 my-4 bg-black text-white">Add module</Button>
+              </TabsContent>
+              <TabsContent value="password">Change your password here.</TabsContent>
+            </Tabs>
+          </div>
+
+        </div>
       </Layout>
     </>
   );
