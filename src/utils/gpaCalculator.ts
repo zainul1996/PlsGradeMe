@@ -1,6 +1,6 @@
-interface Module {
-    points: number;
-    credits: number;
+export interface Module {
+  points: number;
+  credits: number;
 }
 
 /**
@@ -14,25 +14,25 @@ interface Module {
  */
 export function calculateGPA(modules: Module[], currentCGPA: number = 0, currentCU: number = 0) {
 
-    // If the currentCGPA and currentCU are provided, calculate the current cumulative GPA (insert into modules array)
-    if (currentCGPA && currentCU) {
-        modules.push({
-            points: currentCGPA,
-            credits: currentCU
-        });
-    }
+  // If the currentCGPA and currentCU are provided, calculate the current cumulative GPA (insert into modules array)
+  if (currentCGPA && currentCU) {
+    modules.push({
+      points: currentCGPA,
+      credits: currentCU,
+    });
+  }
 
-    // Add all the points and credits and return an object with the total points and credits
-    const acc = modules.reduce((acc, grade) => {
-        acc.totalPoints += grade.points * grade.credits;
-        acc.totalCredits += grade.credits;
-        return acc;
-    }, {
-        totalPoints: 0,
-        totalCredits: 0
-    })
+  // Add all the points and credits and return an object with the total points and credits
+  const acc = modules.reduce((acc, grade) => {
+    acc.totalPoints += grade.points * grade.credits;
+    acc.totalCredits += grade.credits;
+    return acc;
+  }, {
+    totalPoints: 0,
+    totalCredits: 0,
+  });
 
-    return (acc.totalPoints / acc.totalCredits).toFixed(3);
+  return (acc.totalPoints / acc.totalCredits).toFixed(3);
 }
 
 /**
@@ -45,5 +45,5 @@ export function calculateGPA(modules: Module[], currentCGPA: number = 0, current
  * @returns The minimum GPA required to achieve the target GPA
  */
 export function getTargetGPA(currentCPGA: number, currentCU: number, targetGPA: number, targetCU: number) {
-    return (((targetGPA * targetCU) - (currentCPGA * currentCU)) / (targetCU - currentCU)).toFixed(3);
+  return (((targetGPA * targetCU) - (currentCPGA * currentCU)) / (targetCU - currentCU)).toFixed(3);
 }
