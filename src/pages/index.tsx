@@ -87,7 +87,7 @@ export default function Home() {
             <SchoolSelectSection />
             <CurrentGPASection />
           </div>
-          <div className="mt-6 w-full bg-gray-50">
+          <div className="mt-6 w-full bg-gray-50 rounded-md p-4">
 
             <Tabs defaultValue="calculate_cgpa" className="mx-auto">
               <TabsList className="flex justify-evenly">
