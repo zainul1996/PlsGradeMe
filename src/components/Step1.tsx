@@ -52,8 +52,8 @@ function classNames(...classes: (string | boolean)[]) {
 }
 
 interface Step1Props {
-    school: string;
-    setSchool: React.Dispatch<React.SetStateAction<string>>;
+    school: string | null;
+    setSchool: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 export default function Step1({ school, setSchool }: Step1Props) {

@@ -10,7 +10,7 @@ import { useState } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [school, setSchool] = useState<string | null>(null)
+  const [school, setSchool] = useState<null|string>(null)
   const [currentGPA, setCurrentGPA] = useState<number | null>(null)
   const [currentCredits, setCurrentCredits] = useState<number | null>(null)
 
@@ -49,7 +49,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 mt-6">
             <Step1 school={school} setSchool={setSchool} />
-            <Step2 currentGPA={currentGPA} setCurrentGPA={setCurrentGPA} currentCredits={currentCredits} setCurrentCredits={setCurrentCredits} />
+            <Step2 />
           </div>
           <div className="mt-6 w-full bg-gray-50">
             <Tabs defaultValue="account" className="mx-auto">
