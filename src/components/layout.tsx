@@ -1,6 +1,6 @@
-import React from "react";
-import { Disclosure } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import React from 'react';
+import { Disclosure } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const navigation = [
   { name: 'Homepage', href: '/', current: true },
@@ -8,7 +8,7 @@ const navigation = [
   { name: 'Contact us', href: 'contact-us', current: false },
 ]
 
-function classNames(...classes: string[]) {
+export function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
