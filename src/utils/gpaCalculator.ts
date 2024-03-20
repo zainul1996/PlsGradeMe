@@ -12,25 +12,33 @@ export interface Module {
  *
  * @returns The cumulative GPA of the student
  */
-export function calculateGPA(modules: Module[], currentCGPA: number = 0, currentCU: number = 0) {
-
+export function calculateGPA(
+  modules: Module[],
+  currentCGPA: number = 0,
+  currentCU: number = 0
+) {
   // If the currentCGPA and currentCU are provided, calculate the current cumulative GPA (insert into modules array)
+  // Add all the points and credits and return an object with the total points and credits
+  const acc = modules.reduce(
+    (acc, grade) => {
+      acc.totalPoints += grade.points * grade.credits;
+      acc.totalCredits += grade.credits;
+      return acc;
+    },
+    {
+      totalPoints: 0,
+      totalCredits: 0,
+    }
+  );
+
   if (currentCGPA && currentCU) {
-    modules.push({
-      points: currentCGPA,
-      credits: currentCU,
-    });
+    acc.totalPoints += currentCGPA * currentCU;
+    acc.totalCredits += currentCU;
   }
 
-  // Add all the points and credits and return an object with the total points and credits
-  const acc = modules.reduce((acc, grade) => {
-    acc.totalPoints += grade.points * grade.credits;
-    acc.totalCredits += grade.credits;
-    return acc;
-  }, {
-    totalPoints: 0,
-    totalCredits: 0,
-  });
+  if (isNaN(acc.totalPoints / acc.totalCredits)) {
+    return undefined;
+  }
 
   return (acc.totalPoints / acc.totalCredits).toFixed(3);
 }
@@ -44,6 +52,15 @@ export function calculateGPA(modules: Module[], currentCGPA: number = 0, current
  *
  * @returns The minimum GPA required to achieve the target GPA
  */
-export function getTargetGPA(currentCPGA: number, currentCU: number, targetGPA: number, targetCU: number) {
-  return (((targetGPA * targetCU) - (currentCPGA * currentCU)) / (targetCU - currentCU)).toFixed(3);
+
+// TODO: Fix the formula, something's not adding up...
+export function getTargetGPA(
+  currentCPGA: number,
+  currentCU: number,
+  targetGPA: number,
+  targetCU: number
+) {
+  const result =
+    (targetGPA * (currentCU + targetCU) - currentCPGA * currentCU) / targetCU;
+  return Number(result.toFixed(4));
 }
