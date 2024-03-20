@@ -83,7 +83,7 @@ export default function Home() {
       </Head>
       <Layout>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 mt-6">
+          <div className="grid lg:grid-cols-2 gap-12 mt-6 bg-white dark:bg-slate-800">
             <SchoolSelectSection />
             <CurrentGPASection />
           </div>
