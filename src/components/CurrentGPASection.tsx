@@ -56,12 +56,12 @@ export default function CurrentGPASection() {
   }, [values, isValid]);
 
   return (
-    <fieldset className={classNames(!school ? 'opacity-40' : 'opacity-100' , 'bg-white transition-all')}>
-      <legend className="block text-sm font-medium leading-6 text-gray-900">2. Current Results (Optional)</legend>
+    <fieldset className={classNames(!school ? 'opacity-40' : 'opacity-100' , 'bg-white dark:bg-slate-800 transition-all')}>
+      <legend className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-200">2. Current Results (Optional)</legend>
       <div className="isolate -space-y-px rounded-md shadow-sm">
         <div
-          className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-          <label htmlFor="name" className="block text-xs font-medium text-gray-900">
+          className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600 dark:ring-slate-600 dark:focus-within:ring-slate-500">
+          <label htmlFor="name" className="block text-xs font-medium text-gray-900 dark:text-slate-200">
             Current GPA
           </label>
           <input
@@ -69,7 +69,7 @@ export default function CurrentGPASection() {
             type="text"
             name="Current GPA"
             id="current_gpa"
-            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 disabled:cursor-not-allowed"
+            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 disabled:cursor-not-allowed dark:text-slate-200 dark:placeholder-slate-400 dark:bg-slate-800"
             placeholder="3.25"
             value={values.currentGPA || ''}
             onChange={(e) => setFieldValue('currentGPA', e.target.value.trim())}
@@ -82,8 +82,8 @@ export default function CurrentGPASection() {
           )}
         </div>
         <div
-          className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
-          <label htmlFor="job-title" className="block text-xs font-medium text-gray-900">
+          className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600 dark:ring-slate-600 dark:focus-within:ring-slate-500">
+          <label htmlFor="job-title" className="block text-xs font-medium text-gray-900 dark:text-slate-200">
             Current Credits
           </label>
           <input
@@ -91,7 +91,7 @@ export default function CurrentGPASection() {
             type="text"
             name="Current Credits"
             id="current_credits"
-            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 disabled:cursor-not-allowed"
+            className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 disabled:cursor-not-allowed dark:text-slate-200 dark:placeholder-slate-400 dark:bg-slate-800"
             placeholder="130"
             value={values.currentCredits || ''}
             onChange={(e) => setFieldValue('currentCredits', e.target.value.trim())}
