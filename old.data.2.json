@@ -1,0 +1,614 @@
+[
+  {
+    "school": "NYP",
+    "country": "SG",
+    "name": "Nanyang Polytechnic",
+    "filename": "NYP",
+    "grades": [
+      {
+        "grade": "DIST",
+        "point": 4.0
+      },
+      {
+        "grade": "A",
+        "point": 4.0
+      },
+      {
+        "grade": "B+",
+        "point": 3.5
+      },
+      {
+        "grade": "B",
+        "point": 3.0
+      },
+      {
+        "grade": "C+",
+        "point": 2.5
+      },
+      {
+        "grade": "C",
+        "point": 2.0
+      },
+      {
+        "grade": "D+",
+        "point": 1.5
+      },
+      {
+        "grade": "D",
+        "point": 1.0
+      },
+      {
+        "grade": "F",
+        "point": 0
+      }
+    ]
+  },
+  {
+    "school": "NP",
+    "country": "SG",
+    "name": "Ngee Ann Polytechnic",
+    "filename": "NP",
+    "grades": [
+      {
+        "grade": "AD*",
+        "point": 4.0
+      },
+      {
+        "grade": "A+",
+        "point": 4.0
+      },
+      {
+        "grade": "A",
+        "point": 4.0
+      },
+      {
+        "grade": "B+",
+        "point": 3.5
+      },
+      {
+        "grade": "B",
+        "point": 3.0
+      },
+      {
+        "grade": "C+",
+        "point": 2.5
+      },
+      {
+        "grade": "C",
+        "point": 2.0
+      },
+      {
+        "grade": "D+",
+        "point": 1.5
+      },
+      {
+        "grade": "D",
+        "point": 1.0
+      },
+      {
+        "grade": "F",
+        "point": 0
+      },
+      {
+        "grade": "PM",
+        "point": -1
+      }
+    ]
+  },
+  {
+    "school": "SP",
+    "country": "SG",
+    "name": "Singapore Polytechnic",
+    "filename": "SP",
+    "grades": [
+      {
+        "grade": "DIST",
+        "point": 4.0
+      },
+      {
+        "grade": "A",
+        "point": 4.0
+      },
+      {
+        "grade": "B+",
+        "point": 3.5
+      },
+      {
+        "grade": "B",
+        "point": 3.0
+      },
+      {
+        "grade": "C+",
+        "point": 2.5
+      },
+      {
+        "grade": "C",
+        "point": 2.0
+      },
+      {
+        "grade": "D+",
+        "point": 1.5
+      },
+      {
+        "grade": "D",
+        "point": 1.0
+      },
+      {
+        "grade": "D-",
+        "point": 0.5
+      },
+      {
+        "grade": "P",
+        "point": 0.5
+      },
+      {
+        "grade": "F",
+        "point": 0
+      },
+      {
+        "grade": "ABS",
+        "point": 0
+      }
+    ]
+  },
+  {
+    "school": "RP",
+    "country": "SG",
+    "name": "Republic Polytechnic",
+    "filename": "RP",
+    "grades": [
+      {
+        "grade": "A",
+        "point": 4.0
+      },
+      {
+        "grade": "B+",
+        "point": 3.5
+      },
+      {
+        "grade": "B",
+        "point": 3.0
+      },
+      {
+        "grade": "C+",
+        "point": 2.5
+      },
+      {
+        "grade": "C",
+        "point": 2.0
+      },
+      {
+        "grade": "D+",
+        "point": 1.5
+      },
+      {
+        "grade": "D",
+        "point": 1.0
+      },
+      {
+        "grade": "E",
+        "point": 0.5
+      },
+      {
+        "grade": "F",
+        "point": 0
+      }
+    ]
+  },
+  {
+    "school": "TP",
+    "country": "SG",
+    "name": "Temasek Polytechnic",
+    "filename": "TP",
+    "grades": [
+      {
+        "grade": "A",
+        "point": 4.0
+      },
+      {
+        "grade": "B+",
+        "point": 3.5
+      },
+      {
+        "grade": "B",
+        "point": 3.0
+      },
+      {
+        "grade": "C+",
+        "point": 2.5
+      },
+      {
+        "grade": "C",
+        "point": 2.0
+      },
+      {
+        "grade": "D+",
+        "point": 1.5
+      },
+      {
+        "grade": "D",
+        "point": 1.0
+      },
+      {
+        "grade": "E",
+        "point": 0.5
+      },
+      {
+        "grade": "F",
+        "point": 0
+      }
+    ]
+  },
+  {
+    "school": "NUS",
+    "country": "SG",
+    "name": "National University of Singapore",
+    "filename": "NUS",
+    "grades": [
+      {
+        "grade": "A+",
+        "point": 5.0
+      },
+      {
+        "grade": "A",
+        "point": 5.0
+      },
+      {
+        "grade": "A-",
+        "point": 4.5
+      },
+      {
+        "grade": "B+",
+        "point": 4.0
+      },
+      {
+        "grade": "B",
+        "point": 3.5
+      },
+      {
+        "grade": "B-",
+        "point": 3.0
+      },
+      {
+        "grade": "C+",
+        "point": 2.5
+      },
+      {
+        "grade": "C",
+        "point": 2.0
+      },
+      {
+        "grade": "D+",
+        "point": 1.5
+      },
+      {
+        "grade": "D",
+        "point": 1.0
+      },
+      {
+        "grade": "F",
+        "point": 0
+      }
+    ]
+  },
+  {
+    "school": "SIT",
+    "country": "SG",
+    "name": "Singapore Institute of Technology",
+    "filename": "SIT",
+    "grades": [
+      {
+        "grade": "A+",
+        "point": 5.0
+      },
+      {
+        "grade": "A",
+        "point": 5.0
+      },
+      {
+        "grade": "A-",
+        "point": 4.5
+      },
+      {
+        "grade": "B+",
+        "point": 4.0
+      },
+      {
+        "grade": "B",
+        "point": 3.5
+      },
+      {
+        "grade": "B-",
+        "point": 3.0
+      },
+      {
+        "grade": "C+",
+        "point": 2.5
+      },
+      {
+        "grade": "C",
+        "point": 2.0
+      },
+      {
+        "grade": "D+",
+        "point": 1.5
+      },
+      {
+        "grade": "D",
+        "point": 1.0
+      },
+      {
+        "grade": "F",
+        "point": 0
+      }
+    ]
+  },
+  {
+    "school": "NTU",
+    "country": "SG",
+    "name": "Nanyang Technological University",
+    "filename": "NTU",
+    "grades": [
+      {
+        "grade": "A+",
+        "point": 5.0
+      },
+      {
+        "grade": "A",
+        "point": 5.0
+      },
+      {
+        "grade": "A-",
+        "point": 4.5
+      },
+      {
+        "grade": "B+",
+        "point": 4.0
+      },
+      {
+        "grade": "B",
+        "point": 3.5
+      },
+      {
+        "grade": "B-",
+        "point": 3.0
+      },
+      {
+        "grade": "C+",
+        "point": 2.5
+      },
+      {
+        "grade": "C",
+        "point": 2.0
+      },
+      {
+        "grade": "D+",
+        "point": 1.5
+      },
+      {
+        "grade": "D",
+        "point": 1.0
+      },
+      {
+        "grade": "F",
+        "point": 0
+      }
+    ]
+  },
+  {
+    "school": "SUTD",
+    "country": "SG",
+    "name": "Singapore University of Technology and Design",
+    "filename": "SUTD",
+    "grades": [
+      {
+        "grade": "A+",
+        "point": 5.0
+      },
+      {
+        "grade": "A",
+        "point": 5.0
+      },
+      {
+        "grade": "A-",
+        "point": 4.5
+      },
+      {
+        "grade": "B+",
+        "point": 4.0
+      },
+      {
+        "grade": "B",
+        "point": 3.5
+      },
+      {
+        "grade": "B-",
+        "point": 3.0
+      },
+      {
+        "grade": "C+",
+        "point": 2.5
+      },
+      {
+        "grade": "C",
+        "point": 2.0
+      },
+      {
+        "grade": "D+",
+        "point": 1.5
+      },
+      {
+        "grade": "D",
+        "point": 1.0
+      },
+      {
+        "grade": "F",
+        "point": 0
+      }
+    ]
+  },
+  {
+    "school": "SMU",
+    "country": "SG",
+    "name": "Singapore Management University",
+    "filename": "SMU",
+    "grades": [
+      {
+        "grade": "A+",
+        "point": 4.3
+      },
+      {
+        "grade": "A",
+        "point": 4.0
+      },
+      {
+        "grade": "A-",
+        "point": 3.7
+      },
+      {
+        "grade": "B+",
+        "point": 3.3
+      },
+      {
+        "grade": "B",
+        "point": 3.0
+      },
+      {
+        "grade": "B-",
+        "point": 2.7
+      },
+      {
+        "grade": "C+",
+        "point": 2.4
+      },
+      {
+        "grade": "C",
+        "point": 2.0
+      },
+      {
+        "grade": "C-",
+        "point": 1.7
+      },
+      {
+        "grade": "D+",
+        "point": 1.3
+      },
+      {
+        "grade": "D",
+        "point": 1.0
+      },
+      {
+        "grade": "F",
+        "point": 0
+      }
+    ]
+  },
+  {
+    "school": "DP",
+    "country": "SG",
+    "name": "DigiPen Institute of Technology, Singapore",
+    "filename": "DP",
+    "grades": [
+      {
+        "grade": "A",
+        "point": 4.0
+      },
+      {
+        "grade": "A-",
+        "point": 3.7
+      },
+      {
+        "grade": "B+",
+        "point": 3.3
+      },
+      {
+        "grade": "B",
+        "point": 3.0
+      },
+      {
+        "grade": "B-",
+        "point": 2.7
+      },
+      {
+        "grade": "C+",
+        "point": 2.3
+      },
+      {
+        "grade": "C",
+        "point": 2.0
+      },
+      {
+        "grade": "C-",
+        "point": 1.7
+      },
+      {
+        "grade": "D",
+        "point": 1.0
+      },
+      {
+        "grade": "F",
+        "point": 0
+      }
+    ]
+  },
+  {
+    "school": "TUM",
+    "country": "SG",
+    "name": "Technical University of Munich Asia",
+    "filename": "TUM",
+    "grades": [
+      {
+        "grade": "5.0",
+        "point": 5.0
+      },
+      {
+        "grade": "4.7",
+        "point": 4.7
+      },
+      {
+        "grade": "4.3",
+        "point": 4.3
+      },
+      {
+        "grade": "4.0",
+        "point": 4.0
+      },
+      {
+        "grade": "3.7",
+        "point": 3.7
+      },
+      {
+        "grade": "3.3",
+        "point": 3.3
+      },
+      {
+        "grade": "3.0",
+        "point": 3.0
+      },
+      {
+        "grade": "2.7",
+        "point": 2.7
+      },
+      {
+        "grade": "2.3",
+        "point": 2.3
+      },
+      {
+        "grade": "2.0",
+        "point": 2.0
+      },
+      {
+        "grade": "1.7",
+        "point": 1.7
+      },
+      {
+        "grade": "1.3",
+        "point": 1.3
+      },
+      {
+        "grade": "1.0",
+        "point": 1.0
+      }
+    ]
+  }
+]
