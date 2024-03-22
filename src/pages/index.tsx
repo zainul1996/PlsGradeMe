@@ -101,21 +101,30 @@ export default function Home() {
                 className="mt-6 w-full bg-slate-800 rounded-md p-4 text-foreground"
               >
                 <Tabs defaultValue="calculate_cgpa" className="mx-auto">
-                  <TabsList className="flex justify-evenly">
-                    <TabsTrigger value="calculate_cgpa">
+                  <TabsList className="flex justify-evenly bg-black/20">
+                    <TabsTrigger
+                      value="calculate_cgpa"
+                      className={'aria-selected:bg-red-500'}
+                    >
                       Calculate cGPA
                     </TabsTrigger>
-                    <TabsTrigger value="calculate_target_gpa">
+                    <TabsTrigger value="calculate_target_gpa" className={''}>
                       Calculate Target GPA
                     </TabsTrigger>
                   </TabsList>
                   <TabsContent value="calculate_cgpa">
-                    <div className={'rounded-lg text-white'}>
+                    <div
+                      className={'rounded-lg text-white bg-black/20 py-5 px-3'}
+                    >
                       <CalculateCGPATab school={school} />
                     </div>
                   </TabsContent>
                   <TabsContent value="calculate_target_gpa">
-                    <CalculateTargetGPATab school={school} />
+                    <div
+                      className={'rounded-lg text-white bg-black/20 py-5 px-3'}
+                    >
+                      <CalculateTargetGPATab school={school} />
+                    </div>
                   </TabsContent>
                 </Tabs>
               </motion.div>
