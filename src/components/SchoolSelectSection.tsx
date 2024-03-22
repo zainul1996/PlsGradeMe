@@ -64,35 +64,30 @@ export default function SchoolSelectSection() {
     return schools.filter((school) => {
       return school.name.toLowerCase().includes(query.toLowerCase());
     });
-
   }, [query]);
 
-  const selectedSchoolInfo = useMemo(() => {
-    return GPAData.find((sch) => sch.school === school);
-  }, [school]);
-
   return (
-    <Combobox as="div" value={school} onChange={setSchool}>
+    <Combobox as="div" value={school?.school} onChange={setSchool}>
       <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">
         1. Select School
       </Combobox.Label>
       <div className="relative mt-2">
         <Combobox.Input
           placeholder={'Search for your school'}
-          className="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-12 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 dark:bg-slate-900 dark:text-slate-200 dark:focus:ring-slate-500 dark:ring-slate-600"
+          className="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-12 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 dark:bg-transparent dark:text-slate-200 dark:focus:ring-slate-500 dark:ring-slate-600"
           onChange={(event) => setQuery(event.target.value)}
-          displayValue={(value: string) => selectedSchoolInfo?.name || ''}
+          displayValue={(value: string) => school?.name || ''}
         />
 
         {/*Dropdown button*/}
-        <Combobox.Button
-          className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
-          <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+        <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
+          <ChevronUpDownIcon
+            className="h-5 w-5 text-gray-400"
+            aria-hidden="true"
+          />
         </Combobox.Button>
 
-
-        <Combobox.Options
-          className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm dark:bg-slate-700 dark:text-slate-100">
+        <Combobox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm dark:bg-slate-700 dark:text-slate-100">
           {filteredSchools.length > 0 ? (
             <>
               {filteredSchools.map((sch) => (
@@ -102,25 +97,38 @@ export default function SchoolSelectSection() {
                   className={({ active, disabled }) =>
                     classNames(
                       'relative cursor-default select-none py-2 pl-3 pr-9',
-                      active ? 'bg-indigo-600 text-white dark:bg-slate-200 dark:text-gray-900' : 'text-gray-900 dark:text-slate-200',
-                      disabled && 'opacity-50',
+                      active
+                        ? 'bg-indigo-600 text-white dark:bg-slate-200 dark:text-gray-900'
+                        : 'text-gray-900 dark:text-slate-200',
+                      disabled && 'opacity-50'
                     )
                   }
                 >
                   {({ active, selected }) => (
                     <>
                       <div className="flex items-center">
-                        <img src={sch.image} alt=""
-                          className="h-6 w-6 flex-shrink-0 rounded-full" />
+                        <img
+                          src={sch.image}
+                          alt=""
+                          className="h-6 w-6 flex-shrink-0 rounded-full"
+                        />
                         <span
-                          className={classNames('ml-3 truncate', selected && 'font-semibold')}>{sch.name}</span>
+                          className={classNames(
+                            'ml-3 truncate',
+                            selected && 'font-semibold'
+                          )}
+                        >
+                          {sch.name}
+                        </span>
                       </div>
 
                       {selected && (
                         <span
                           className={classNames(
                             'absolute inset-y-0 right-0 flex items-center pr-4',
-                            active ? 'text-white dark:text-gray-900' : 'text-indigo-600 dark:text-slate-200'
+                            active
+                              ? 'text-white dark:text-gray-900'
+                              : 'text-indigo-600 dark:text-slate-200'
                           )}
                         >
                           <CheckIcon className="h-5 w-5" aria-hidden="true" />
@@ -130,7 +138,6 @@ export default function SchoolSelectSection() {
                   )}
                 </Combobox.Option>
               ))}
-
             </>
           ) : (
             <Combobox.Option
@@ -140,15 +147,15 @@ export default function SchoolSelectSection() {
                 classNames(
                   'relative cursor-default select-none py-2 pl-3 pr-9',
                   active ? 'bg-indigo-600 text-white' : 'text-gray-900',
-                  disabled && 'opacity-50',
+                  disabled && 'opacity-50'
                 )
               }
             >
               <div className="flex items-center">
-                <span className={classNames('ml-3 truncate')}>No Results Found</span>
+                <span className={classNames('ml-3 truncate')}>
+                  No Results Found
+                </span>
               </div>
-
-
             </Combobox.Option>
           )}
         </Combobox.Options>
