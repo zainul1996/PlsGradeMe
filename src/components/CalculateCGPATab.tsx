@@ -4,6 +4,8 @@ import { calculateGPA, ModuleWithID } from '@utils/gpaCalculator';
 import { ModuleComponent } from '@components/ModuleComponent';
 import { Button } from '../../@components/ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
+import { FaShareAlt } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa6';
 
 export default function CalculateCGPATab({ school }: { school: School }) {
   const {
@@ -36,25 +38,6 @@ export default function CalculateCGPATab({ school }: { school: School }) {
 
   return (
     <>
-      <div className={'flex justify-end gap-2'}>
-        <Button
-          disabled={!school}
-          onClick={handleAddModule}
-          className={'bg-black text-white'}
-        >
-          Share
-        </Button>
-
-        <Button
-          color={'primary'}
-          disabled={!school}
-          onClick={handleAddModule}
-          className={'bg-black text-white'}
-        >
-          Add Module
-        </Button>
-      </div>
-
       {calculatedCGPA && (
         <>
           <p className={'text-lg text-center'}>
@@ -63,6 +46,18 @@ export default function CalculateCGPATab({ school }: { school: School }) {
           </p>
         </>
       )}
+
+      <div className={'flex justify-end gap-2'}>
+        <Button
+          disabled={!school}
+          onClick={handleAddModule}
+          size={'sm'}
+          className={'bg-black text-white py-2 text-xs'}
+        >
+          <FaShareAlt className={'mr-2'} />
+          Share
+        </Button>
+      </div>
 
       <div className={'space-y-3 my-3'}>
         <AnimatePresence>
@@ -91,6 +86,17 @@ export default function CalculateCGPATab({ school }: { school: School }) {
           ))}
         </AnimatePresence>
       </div>
+
+      <Button
+        color={'primary'}
+        disabled={!school}
+        onClick={handleAddModule}
+        size={'sm'}
+        className={'flex ml-auto bg-slate-600 text-white text-xs py-2'}
+      >
+        <FaPlus className={'mr-2'} />
+        Add Module
+      </Button>
 
       {/*<AddModuleModal*/}
       {/*  isOpen={isOpen}*/}
