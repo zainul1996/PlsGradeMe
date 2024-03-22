@@ -1,10 +1,10 @@
 import { classNames } from '@components/layout';
-import { useGPAContext } from '@components/contexts/GPAContextProvider';
+import { School, useGPAContext } from '@components/contexts/GPAContextProvider';
 import { useFormik } from 'formik';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
 import { useEffect } from 'react';
 import { z } from 'zod';
-import { getTargetGPA } from '@utils/gpaCalculator';
+import { calculateGoalGPA } from '@utils/gpaCalculator';
 
 const currentGPASectionSchema = z.object({
   targetGPA: z.coerce
@@ -27,13 +27,10 @@ const currentGPASectionSchema = z.object({
     .default(null),
 });
 
-export default function CalculateTargetGPATab() {
+export default function CalculateTargetGPATab({ school }: { school: School }) {
   const {
-    school,
     currentGPA,
     currentCredits,
-    setCurrentGPA,
-    setCurrentCredits,
     targetGPA,
     targetCredits,
     setTargetCredits,
@@ -42,8 +39,8 @@ export default function CalculateTargetGPATab() {
 
   const { values, handleSubmit, errors, setFieldValue, isValid } = useFormik({
     initialValues: {
-      targetGPA,
-      targetCredits,
+      targetGPA: targetGPA || 0,
+      targetCredits: targetCredits || 0,
     },
     validationSchema: toFormikValidationSchema(currentGPASectionSchema),
     onSubmit: (values) => {},
@@ -76,11 +73,12 @@ export default function CalculateTargetGPATab() {
     );
   }
 
-  const calculatedTargetGPA = getTargetGPA(
+  const calculatedTargetGPA = calculateGoalGPA(
     currentGPA,
     currentCredits,
     values.targetGPA!,
-    values.targetCredits!
+    values.targetCredits!,
+    school
   );
 
   return (
@@ -148,13 +146,24 @@ export default function CalculateTargetGPATab() {
       </fieldset>
 
       {calculatedTargetGPA && values.targetCredits && values.targetCredits && (
-        <>
-          <p>Results:</p>
-          <p>
-            You need to at least get {calculatedTargetGPA} for the next
-            semester. Good luck!
-          </p>
-        </>
+        <div className={'text-gray-200 my-3 text-center'}>
+          {calculatedTargetGPA.isAchievable ? (
+            <p>
+              You&apos;ll need a minimum of{' '}
+              <span className={'underline font-bold'}>
+                {calculatedTargetGPA.goalGPA}
+              </span>{' '}
+              to achieve your target GPA! All the best, we&apos;re rooting for
+              you!
+            </p>
+          ) : (
+            <p>
+              Unfortunately, it&apos;s not possible to achieve your target GPA
+              within the next semester. You&apos;ll need more than 1 semester to
+              achieve your target GPA.
+            </p>
+          )}
+        </div>
       )}
     </>
   );
