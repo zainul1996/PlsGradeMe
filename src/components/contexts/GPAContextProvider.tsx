@@ -4,14 +4,15 @@ import React, {
   useContext,
   useState,
 } from 'react';
-import { Module } from '@utils/gpaCalculator';
+import { Module, ModuleWithID } from '@utils/gpaCalculator';
 import GPAData from '@utils/GPAData';
+import { generateRandomId } from '@utils/generateRandomId';
 
 interface GPAContextInterface {
-  school: string | null;
+  school: School | null;
   currentGPA: number | null;
   currentCredits: number | null;
-  modules: Module[];
+  modules: ModuleWithID[];
 
   targetGPA: number | null;
   targetCredits: number | null;
@@ -23,8 +24,8 @@ interface GPAContextInterface {
   setTargetCredits: (credits: number | null) => void;
 
   addModule: (module: Module) => void;
-  editModule: (index: number, module: Module) => void;
-  removeModule: (index: number) => void;
+  editModule: (module: ModuleWithID) => void;
+  removeModule: (moduleId: string) => void;
 }
 
 type Schools = (typeof GPAData)[number]['school'];
@@ -50,10 +51,10 @@ export const GPAContextProvider: React.FC<PropsWithChildren<{}>> = ({
   children,
 }) => {
   // Used for CGPA calculation
-  const [school, _setSchool] = useState<string | null>(null);
+  const [school, _setSchool] = useState<School | null>(null);
   const [currentGPA, setCurrentGPA] = useState<number | null>(null);
   const [currentCredits, setCurrentCredits] = useState<number | null>(null);
-  const [modules, setModules] = useState<Module[]>([]);
+  const [modules, setModules] = useState<ModuleWithID[]>([]);
 
   // Extra states for calculating target GPA
   const [targetGPA, setTargetGPA] = useState<number | null>(null);
@@ -63,31 +64,40 @@ export const GPAContextProvider: React.FC<PropsWithChildren<{}>> = ({
    * Set the school state
    * The reason for this is to reset the modules when the school is changed
    * This is because different schools have different grading systems
-   * @param name
+   *
+   * Also, the name is supposed to correspond to the 'school' key in the GPAData.ts file
+   * @example 'SP' for Singapore Polytechnic
+   * @param school
    */
-  const setSchool = (name: string | null) => {
-    if (!name) return;
+  const setSchool = (school: string | null) => {
+    if (!school) return;
 
-    _setSchool(name);
+    // Find school and set the state
+    GPAData.forEach((data) => {
+      if (data.school === school) {
+        _setSchool(data);
+      }
+    });
+
     setModules([]);
   };
 
   const addModule = (module: Module) => {
     setModules((prev) => {
-      return [...prev, { ...module }];
+      return [...prev, { ...module, id: generateRandomId().toString() }];
     });
   };
 
-  const removeModule = (index: number) => {
+  const removeModule = (moduleId: string) => {
     setModules((prev) => {
-      return prev.filter((_, i) => i !== index);
+      return prev.filter((_) => _.id !== moduleId);
     });
   };
 
-  const editModule = (index: number, module: Module) => {
+  const editModule = (module: ModuleWithID) => {
     setModules((prev) => {
-      return prev.map((m, i) => {
-        if (i === index) {
+      return prev.map((m) => {
+        if (m.id === module.id) {
           return module;
         }
         return m;
@@ -98,7 +108,7 @@ export const GPAContextProvider: React.FC<PropsWithChildren<{}>> = ({
   // console.log('[DEBUG - GPACONTEXTPROVIDER] school', school);
   // console.log('[DEBUG - GPACONTEXTPROVIDER] currentGPA', currentGPA);
   // console.log('[DEBUG - GPACONTEXTPROVIDER] currentCredits', currentCredits);
-  // console.log('[DEBUG - GPACONTEXTPROVIDER] modules', modules);
+  console.log('[DEBUG - GPACONTEXTPROVIDER] modules', modules);
 
   return (
     <GPAContext.Provider
