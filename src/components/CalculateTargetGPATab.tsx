@@ -67,7 +67,7 @@ export default function CalculateTargetGPATab({ school }: { school: School }) {
 
   if (!currentGPA || !currentCredits) {
     return (
-      <p>
+      <p className={'text-white text-center mt-4'}>
         Please fill in your current GPA and credits to calculate your target GPA
       </p>
     );
