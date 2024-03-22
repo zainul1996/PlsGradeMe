@@ -1,18 +1,18 @@
 import CurrentGPASection from '@components/CurrentGPASection';
 import SchoolSelectSection from '@components/SchoolSelectSection';
 import Layout from '@components/layout';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import { Inter } from 'next/font/google';
 import Head from 'next/head';
 import CalculateCGPATab from '@components/CalculateCGPATab';
 import CalculateTargetGPATab from '@components/CalculateTargetGPATab';
+import { useGPAContext } from '@components/contexts/GPAContextProvider';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-  // const [school, setSchool] = useState<null|string>(null)
-  // const [currentGPA, setCurrentGPA] = useState<number | null>(null)
-  // const [currentCredits, setCurrentCredits] = useState<number | null>(null)
+  const { school } = useGPAContext();
 
   return (
     <>
@@ -87,22 +87,40 @@ export default function Home() {
             <SchoolSelectSection />
             <CurrentGPASection />
           </div>
-          <div className="mt-6 w-full bg-gray-50 rounded-md p-4">
 
-            <Tabs defaultValue="calculate_cgpa" className="mx-auto">
-              <TabsList className="flex justify-evenly">
-                <TabsTrigger value="calculate_cgpa">Calculate cGPA</TabsTrigger>
-                <TabsTrigger value="calculate_target_gpa">Calculate Target GPA</TabsTrigger>
-              </TabsList>
-              <TabsContent value="calculate_cgpa">
-                <CalculateCGPATab />
-              </TabsContent>
-              <TabsContent value="calculate_target_gpa">
-                <CalculateTargetGPATab />
-              </TabsContent>
-            </Tabs>
-
-          </div>
+          <AnimatePresence>
+            {school && (
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { opacity: 1 },
+                }}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                className="mt-6 w-full bg-slate-800 rounded-md p-4 text-foreground"
+              >
+                <Tabs defaultValue="calculate_cgpa" className="mx-auto">
+                  <TabsList className="flex justify-evenly">
+                    <TabsTrigger value="calculate_cgpa">
+                      Calculate cGPA
+                    </TabsTrigger>
+                    <TabsTrigger value="calculate_target_gpa">
+                      Calculate Target GPA
+                    </TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="calculate_cgpa">
+                    <div className={'rounded-lg text-white'}>
+                      <CalculateCGPATab school={school} />
+                    </div>
+                  </TabsContent>
+                  <TabsContent value="calculate_target_gpa">
+                    <CalculateTargetGPATab school={school} />
+                  </TabsContent>
+                </Tabs>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </Layout>
     </>
