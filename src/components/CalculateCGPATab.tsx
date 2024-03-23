@@ -40,7 +40,7 @@ export default function CalculateCGPATab({ school }: { school: School }) {
     <>
       {calculatedCGPA && (
         <>
-          <p className={'text-lg text-center'}>
+          <p className={'text-center text-lg'}>
             Your next semester&apos;s GPA:{' '}
             <span className={'font-bold underline'}>{calculatedCGPA}</span>
           </p>
@@ -52,14 +52,14 @@ export default function CalculateCGPATab({ school }: { school: School }) {
           disabled={!school}
           onClick={handleAddModule}
           size={'sm'}
-          className={'bg-black text-white py-2 text-xs'}
+          className={'bg-black py-2 text-xs text-white'}
         >
           <FaShareAlt className={'mr-2'} />
           Share
         </Button>
       </div>
 
-      <div className={'space-y-3 my-3'}>
+      <div className={'my-3 space-y-3'}>
         <AnimatePresence>
           {modules.map((module) => (
             <motion.div
@@ -92,7 +92,7 @@ export default function CalculateCGPATab({ school }: { school: School }) {
         disabled={!school}
         onClick={handleAddModule}
         size={'sm'}
-        className={'flex ml-auto bg-slate-600 text-white text-xs py-2'}
+        className={'ml-auto flex bg-slate-600 py-2 text-xs text-white'}
       >
         <FaPlus className={'mr-2'} />
         Add Module

@@ -83,7 +83,7 @@ export default function Home() {
       </Head>
       <Layout>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 mt-6 bg-white dark:bg-slate-800">
+          <div className="mt-6 grid gap-12 bg-white lg:grid-cols-2 dark:bg-slate-800">
             <SchoolSelectSection />
             <CurrentGPASection />
           </div>
@@ -98,7 +98,7 @@ export default function Home() {
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
-                className="mt-6 w-full bg-slate-800 rounded-md p-4 text-foreground"
+                className="mt-6 w-full rounded-md bg-slate-800 p-4 text-foreground"
               >
                 <Tabs defaultValue="calculate_cgpa" className="mx-auto">
                   <TabsList className="flex justify-evenly bg-black/20">
@@ -114,14 +114,14 @@ export default function Home() {
                   </TabsList>
                   <TabsContent value="calculate_cgpa">
                     <div
-                      className={'rounded-lg text-white bg-black/20 py-5 px-3'}
+                      className={'rounded-lg bg-black/20 px-3 py-5 text-white'}
                     >
                       <CalculateCGPATab school={school} />
                     </div>
                   </TabsContent>
                   <TabsContent value="calculate_target_gpa">
                     <div
-                      className={'rounded-lg text-white bg-black/20 py-5 px-3'}
+                      className={'rounded-lg bg-black/20 px-3 py-5 text-white'}
                     >
                       <CalculateTargetGPATab school={school} />
                     </div>
