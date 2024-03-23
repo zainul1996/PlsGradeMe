@@ -59,7 +59,7 @@ export function ModuleComponent({
         value={module.name}
         placeholder={'Edit module name'}
         className={
-          'bg-transparent p-0 m-0 border-0 text-sm text-gray-300 mb-1 w-full'
+          'm-0 mb-1 w-full border-0 bg-transparent p-0 text-sm text-gray-300'
         }
         onChange={(e) => {
           editModule({
@@ -84,7 +84,7 @@ export function ModuleComponent({
 
       <div
         className={
-          'flex flex-wrap p-3 border border-foreground/20 rounded-xl gap-2 bg-white/5'
+          'flex flex-wrap gap-2 rounded-xl border border-foreground/20 bg-white/5 p-3'
         }
       >
         {/*<div className={'flex-1'}>*/}
@@ -143,15 +143,15 @@ export function ModuleComponent({
               });
             }}
           >
-            <div className="relative mt-1">
+            <div className="relative">
               <label
                 htmlFor="grade"
-                className="block w-full border-0 p-0 text-gray-300 placeholder:text-gray-700 focus:ring-0 sm:text-sm sm:leading-6 disabled:cursor-not-allowed"
+                className="block w-full border-0 p-0 text-gray-300 placeholder:text-gray-700 focus:ring-0 disabled:cursor-not-allowed sm:text-sm sm:leading-6"
               >
                 Grade
               </label>
 
-              <Listbox.Button className="relative w-full cursor-default border border-foreground/20 rounded-lg bg-transparent py-2 pl-3 pr-10 text-left  focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+              <Listbox.Button className="relative w-full cursor-default rounded-md border border-foreground/20 bg-transparent py-2 pl-3 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                 <span className="block truncate">{module.grade}</span>
                 <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                   <ChevronUpDownIcon
@@ -166,7 +166,7 @@ export function ModuleComponent({
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Listbox.Options className="z-40 absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                <Listbox.Options className="absolute z-40 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
                   {/*Map through every grade for the school*/}
                   {Object.keys(selectedSchool.grades).map((grade) => (
                     <Listbox.Option
@@ -210,16 +210,14 @@ export function ModuleComponent({
         <div className={'flex-1'}>
           <label
             htmlFor="credits"
-            className="block w-full border-0 p-0 text-gray-300 placeholder:text-gray-700 focus:ring-0 sm:text-sm sm:leading-6 disabled:cursor-not-allowed"
+            className="block w-full border-0 p-0 text-gray-300 placeholder:text-gray-700 focus:ring-0 disabled:cursor-not-allowed sm:text-sm sm:leading-6"
           >
             Credits
           </label>
 
-          {/*<p>{credits}</p>*/}
-
-          <div className="relative rounded-md px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600 dark:ring-slate-600 dark:focus-within:ring-slate-500">
+          <div className="relative rounded-md py-2 pl-3 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600 dark:ring-slate-600 dark:focus-within:ring-slate-500">
             <input
-              className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 disabled:cursor-not-allowed dark:text-slate-200 dark:placeholder-slate-400 dark:bg-transparent"
+              className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 disabled:cursor-not-allowed sm:text-sm sm:leading-6 dark:bg-transparent dark:text-slate-200 dark:placeholder-slate-400"
               placeholder={'6'}
               value={
                 isNaN(module.credits)
@@ -245,7 +243,7 @@ export function ModuleComponent({
           color={'danger'}
           size={'sm'}
           className={
-            'absolute top-4 -right-4 rounded-full bg-red-500 w-[30px] h-[30px] aspect-square text-lg'
+            'absolute -right-4 top-4 aspect-square h-[30px] w-[30px] rounded-full bg-red-500 text-lg'
           }
         >
           <FaX />
