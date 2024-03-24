@@ -2,10 +2,11 @@ import { School, useGPAContext } from '@components/contexts/GPAContextProvider';
 import { Fragment, useMemo } from 'react';
 import { calculateGPA, ModuleWithID } from '@utils/gpaCalculator';
 import { ModuleComponent } from '@components/ModuleComponent';
-import { Button } from '../../@components/ui/button';
+import { Button } from './ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FaShareAlt } from 'react-icons/fa';
 import { FaPlus } from 'react-icons/fa6';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 
 export default function CalculateCGPATab({ school }: { school: School }) {
   const {
@@ -48,7 +49,7 @@ export default function CalculateCGPATab({ school }: { school: School }) {
       )}
 
       <div className={'flex justify-end gap-2'}>
-        <Button
+        {/* <Button
           disabled={!school}
           onClick={handleAddModule}
           size={'sm'}
@@ -56,7 +57,20 @@ export default function CalculateCGPATab({ school }: { school: School }) {
         >
           <FaShareAlt className={'mr-2'} />
           Share
-        </Button>
+        </Button> */}
+        <Popover>
+          <PopoverTrigger>
+            <Button
+              disabled={!school}
+              size={'sm'}
+              className={'bg-black py-2 text-xs text-white'}
+            >
+              <FaShareAlt className={'mr-2'} />
+              Share
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent>Place content for the popover here.</PopoverContent>
+        </Popover>
       </div>
 
       <div className={'my-3 space-y-3'}>
