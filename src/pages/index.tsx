@@ -8,11 +8,35 @@ import CalculateTargetGPATab from '@components/CalculateTargetGPATab';
 import { useGPAContext } from '@components/contexts/GPAContextProvider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const { school } = useGPAContext();
+
+  // Hash JSON Object and add to KV Store, returns uuid
+  // const postData = async () => {
+  //   const response = await fetch('/api/store', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       name: 'John Doe',
+  //       age: 30,
+  //     }),
+  //   });
+  //   const { key } = await response.json();
+  //   console.log('Key:', key);
+  // };
+
+  // gets JSON Object from KV Store, given uuid
+  // const getData = async () => {
+  //   const response = await fetch(`/api/store?key=${key}`);
+  //   const data = await response.json();
+  //   console.log('Data:', data);
+  // };
 
   return (
     <>
