@@ -53,3 +53,5 @@ export default async function handler(
     }
   } else {
     return response.status(405).json({ error: 'Method not allowed' });
+  }
+}
