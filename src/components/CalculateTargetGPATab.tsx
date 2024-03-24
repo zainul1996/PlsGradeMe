@@ -67,7 +67,7 @@ export default function CalculateTargetGPATab({ school }: { school: School }) {
 
   if (!currentGPA || !currentCredits) {
     return (
-      <p className={'text-white text-center mt-4'}>
+      <p className={'mt-4 text-center text-white'}>
         Please fill in your current GPA and credits to calculate your target GPA
       </p>
     );
@@ -86,71 +86,74 @@ export default function CalculateTargetGPATab({ school }: { school: School }) {
       <fieldset
         className={classNames(
           !school ? 'opacity-40' : 'opacity-100',
-          'bg-white transition-all'
+          'rounded-md bg-white p-6 shadow-sm transition-all dark:bg-transparent'
         )}
       >
-        <div className="isolate -space-y-px rounded-md shadow-sm">
-          <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="flex-1">
             <label
-              htmlFor="name"
-              className="block text-xs font-medium text-gray-900"
+              htmlFor="current_gpa"
+              className="block w-full border-0 p-0 text-gray-300 placeholder:text-gray-700 focus:ring-0 disabled:cursor-not-allowed sm:text-sm sm:leading-6"
             >
               Target GPA
             </label>
-            <input
-              disabled={!school}
-              type="text"
-              name="Current GPA"
-              id="current_gpa"
-              className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 disabled:cursor-not-allowed"
-              placeholder="3.25"
-              value={values.targetGPA || ''}
-              onChange={(e) =>
-                setFieldValue('targetGPA', e.target.value.trim())
-              }
-            />
-
+            <div className="relative rounded-md py-2 pl-3 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600 dark:ring-slate-600 dark:focus-within:ring-slate-500">
+              <input
+                disabled={!school}
+                type="text"
+                name="Current GPA"
+                id="current_gpa"
+                className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 disabled:cursor-not-allowed sm:text-sm sm:leading-6 dark:bg-transparent dark:text-slate-200 dark:placeholder-slate-400"
+                placeholder="3.25"
+                value={values.targetGPA || ''}
+                onChange={(e) =>
+                  setFieldValue('targetGPA', e.target.value.trim())
+                }
+              />
+            </div>
             {errors.targetGPA && (
-              <label className={'block text-xs font-medium text-red-600'}>
+              <p className="text-xs text-red-600 dark:text-red-400">
                 {errors.targetGPA}
-              </label>
+              </p>
             )}
           </div>
-          <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600">
+
+          <div className="flex-1">
             <label
-              htmlFor="job-title"
-              className="block text-xs font-medium text-gray-900"
+              htmlFor="current_credits"
+              className="block w-full border-0 p-0 text-gray-300 placeholder:text-gray-700 focus:ring-0 disabled:cursor-not-allowed sm:text-sm sm:leading-6"
             >
               Credits for next semester
             </label>
-            <input
-              disabled={!school}
-              type="text"
-              name="Current Credits"
-              id="current_credits"
-              className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 disabled:cursor-not-allowed"
-              placeholder="130"
-              value={values.targetCredits || ''}
-              onChange={(e) =>
-                setFieldValue('targetCredits', e.target.value.trim())
-              }
-            />
-
+            <div className="relative rounded-md py-2 pl-3 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600 dark:ring-slate-600 dark:focus-within:ring-slate-500">
+              <input
+                disabled={!school}
+                type="text"
+                name="Current Credits"
+                id="current_credits"
+                className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 disabled:cursor-not-allowed sm:text-sm sm:leading-6 dark:bg-transparent dark:text-slate-200 dark:placeholder-slate-400"
+                placeholder="130"
+                value={values.targetCredits || ''}
+                onChange={(e) =>
+                  setFieldValue('targetCredits', e.target.value.trim())
+                }
+              />
+            </div>
             {errors.targetCredits && (
-              <label className={'block text-xs font-medium text-red-600'}>
+              <p className="text-xs text-red-600 dark:text-red-400">
                 {errors.targetCredits}
-              </label>
+              </p>
             )}
           </div>
         </div>
       </fieldset>
 
-      {calculatedTargetGPA && values.targetCredits && values.targetCredits && (
-        <div className={'text-gray-200 my-3 text-center'}>
+      {calculatedTargetGPA && values.targetCredits && (
+        <div className={'my-3 text-center text-gray-200'}>
           {calculatedTargetGPA.isAchievable ? (
             <p>
               You&apos;ll need a minimum of{' '}
-              <span className={'underline font-bold'}>
+              <span className={'font-bold underline'}>
                 {calculatedTargetGPA.goalGPA}
               </span>{' '}
               to achieve your target GPA! All the best, we&apos;re rooting for
