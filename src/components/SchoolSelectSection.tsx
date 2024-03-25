@@ -4,7 +4,7 @@ import { Combobox } from '@headlessui/react';
 import GPAData from '@utils/GPAData';
 import { useGPAContext } from '@components/contexts/GPAContextProvider';
 
-const schools = GPAData;
+const schools = Object.values(GPAData);
 
 // const schools = [
 //     {

@@ -1,5 +1,5 @@
-const data = [
-  {
+const data = {
+  'NYP': {
     'school': 'NYP',
     'country': 'SG',
     'name': 'Nanyang Polytechnic',
@@ -16,7 +16,7 @@ const data = [
       'F': 0,
     },
   },
-  {
+  'NP': {
     'school': 'NP',
     'country': 'SG',
     'name': 'Ngee Ann Polytechnic',
@@ -35,7 +35,7 @@ const data = [
       'PM': -1,
     },
   },
-  {
+  'SP': {
     'school': 'SP',
     'country': 'SG',
     'name': 'Singapore Polytechnic',
@@ -55,7 +55,7 @@ const data = [
       'ABS': 0,
     },
   },
-  {
+  'RP': {
     'school': 'RP',
     'country': 'SG',
     'name': 'Republic Polytechnic',
@@ -65,14 +65,14 @@ const data = [
       'B+': 3.5,
       'B': 3.0,
       'C+': 2.5,
-      'C': 2.0,
+      'C': 2.02,
       'D+': 1.5,
       'D': 1.0,
       'E': 0.5,
       'F': 0,
     },
   },
-  {
+  'TP': {
     'school': 'TP',
     'country': 'SG',
     'name': 'Temasek Polytechnic',
@@ -89,7 +89,7 @@ const data = [
       'F': 0,
     },
   },
-  {
+  'NUS': {
     'school': 'NUS',
     'country': 'SG',
     'name': 'National University of Singapore',
@@ -108,7 +108,7 @@ const data = [
       'F': 0,
     },
   },
-  {
+  'SIT': {
     'school': 'SIT',
     'country': 'SG',
     'name': 'Singapore Institute of Technology',
@@ -127,7 +127,7 @@ const data = [
       'F': 0,
     },
   },
-  {
+  'NTU': {
     'school': 'NTU',
     'country': 'SG',
     'name': 'Nanyang Technological University',
@@ -146,7 +146,7 @@ const data = [
       'F': 0,
     },
   },
-  {
+  'SUSS': {
     'school': 'SUSS',
     'country': 'SG',
     'name': 'Singapore University of Social Sciences',
@@ -165,7 +165,7 @@ const data = [
       'F': 0,
     },
   },
-  {
+  'SUTD': {
     'school': 'SUTD',
     'country': 'SG',
     'name': 'Singapore University of Technology and Design',
@@ -178,7 +178,7 @@ const data = [
       'F': 0,
     },
   },
-  {
+  'SMU': {
     'school': 'SMU',
     'country': 'SG',
     'name': 'Singapore Management University',
@@ -198,6 +198,6 @@ const data = [
       'F': 0,
     },
   },
-] as const;
+} as const;
 
 export default data;
