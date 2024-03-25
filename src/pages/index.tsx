@@ -8,11 +8,43 @@ import CalculateTargetGPATab from '@components/CalculateTargetGPATab';
 import { useGPAContext } from '@components/contexts/GPAContextProvider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect } from 'react';
+import { Button } from '../../@components/ui/button';
+import { FaShareAlt } from 'react-icons/fa';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-  const { school } = useGPAContext();
+  const { school, parseData } = useGPAContext();
+
+  /**
+   * Get data from the backend if the ?from query parameter is present (to auto-fill the form)
+   */
+  useEffect(() => {
+    // Get ?from= query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const from = urlParams.get('from');
+
+    console.log('from', from);
+
+    if (!from) return;
+
+    // Fetch data from backend
+    fetch(`/api/store?hash=${from}`)
+      .then(res => res.json())
+      .then(d => {
+
+        const {data} = d
+        parseData(JSON.stringify(data))
+
+      //   Remove the 'from' query parameter from the URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      })
+      .catch(e => {
+        // Show modal or Toast
+        console.log('error', e)
+      })
+  }, []);
 
   return (
     <>
@@ -82,6 +114,8 @@ export default function Home() {
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <Layout>
+        <h1>
+        </h1>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mt-6 grid gap-12 bg-white lg:grid-cols-2 dark:bg-slate-800">
             <SchoolSelectSection />
@@ -100,6 +134,8 @@ export default function Home() {
                 exit="hidden"
                 className="mt-6 w-full rounded-md bg-slate-800 p-4 text-foreground"
               >
+
+
                 <Tabs defaultValue="calculate_cgpa" className="mx-auto">
                   <TabsList className="flex justify-evenly bg-black/20">
                     <TabsTrigger
@@ -111,7 +147,10 @@ export default function Home() {
                     <TabsTrigger value="calculate_target_gpa" className={''}>
                       Calculate Target GPA
                     </TabsTrigger>
+
+
                   </TabsList>
+
                   <TabsContent value="calculate_cgpa">
                     <div
                       className={'rounded-lg bg-black/20 px-3 py-5 text-white'}
@@ -127,6 +166,21 @@ export default function Home() {
                     </div>
                   </TabsContent>
                 </Tabs>
+
+                <div className={'flex justify-end gap-2 mt-5'}>
+                  <Button
+                    disabled={!school}
+                    onClick={() => {
+                    }}
+                    size={'sm'}
+                    className={'bg-black/50 py-2 text-xs text-white'}
+                  >
+                    <FaShareAlt className={'mr-2'} />
+                    Share your results
+                  </Button>
+                </div>
+
+
               </motion.div>
             )}
           </AnimatePresence>
