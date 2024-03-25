@@ -148,7 +148,7 @@ export default function CalculateTargetGPATab({ school }: { school: School }) {
         </div>
       </fieldset>
 
-      {calculatedTargetGPA && values.targetCredits && (
+      {calculatedTargetGPA && values.targetCredits ? (
         <div className={'my-3 text-center text-gray-200'}>
           {calculatedTargetGPA.isAchievable ? (
             <p>
@@ -167,7 +167,7 @@ export default function CalculateTargetGPATab({ school }: { school: School }) {
             </p>
           )}
         </div>
-      )}
+      ) : undefined}
     </>
   );
 }
