@@ -8,7 +8,7 @@ import CalculateTargetGPATab from '@components/CalculateTargetGPATab';
 import { useGPAContext } from '@components/contexts/GPAContextProvider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../../@components/ui/button';
 import { FaShareAlt } from 'react-icons/fa';
 
@@ -114,8 +114,6 @@ export default function Home() {
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <Layout>
-        <h1>
-        </h1>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mt-6 grid gap-12 bg-white lg:grid-cols-2 dark:bg-slate-800">
             <SchoolSelectSection />
