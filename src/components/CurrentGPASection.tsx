@@ -41,11 +41,17 @@ export default function CurrentGPASection() {
       currentCredits,
     },
     validationSchema: toFormikValidationSchema(currentGPASectionSchema),
-    onSubmit: (values) => {
-      setCurrentGPA(values.currentGPA);
-      setCurrentCredits(values.currentCredits);
-    },
+    onSubmit: (values) => {},
   });
+
+  useEffect(() => {
+    if(currentGPA && currentCredits){
+
+    setFieldValue('currentGPA', currentGPA)
+    setFieldValue('currentCredits', currentCredits)
+
+    }
+  }, [currentGPA, currentCredits]);
 
   /**
    * Set the values of currentGPA and currentCredits to the context when the form is valid and the values are not null
@@ -56,10 +62,10 @@ export default function CurrentGPASection() {
 
     // remove characters from both values
     const newCurrentGPA = parseFloat(
-      values.currentGPA.toString().replace(/[^0-9.]/g, '')
+      values.currentGPA.toString().replace(/[^0-9.]/g, ''),
     );
     const newCurrentCredits = parseFloat(
-      values.currentCredits.toString().replace(/[^0-9.]/g, '')
+      values.currentCredits.toString().replace(/[^0-9.]/g, ''),
     );
 
     setCurrentGPA(newCurrentGPA);
@@ -70,14 +76,15 @@ export default function CurrentGPASection() {
     <fieldset
       className={classNames(
         !school ? 'opacity-40' : 'opacity-100',
-        'bg-white transition-all dark:bg-slate-800'
+        'bg-white transition-all dark:bg-slate-800',
       )}
     >
       <legend className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-200">
         2. Current Results (Optional)
       </legend>
       <div className="isolate -space-y-px rounded-md shadow-sm">
-        <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600 dark:ring-slate-600 dark:focus-within:ring-slate-500">
+        <div
+          className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600 dark:ring-slate-600 dark:focus-within:ring-slate-500">
           <label
             htmlFor="name"
             className="block text-xs font-medium text-gray-900 dark:text-slate-200"
@@ -101,7 +108,8 @@ export default function CurrentGPASection() {
             </label>
           )}
         </div>
-        <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600 dark:ring-slate-600 dark:focus-within:ring-slate-500">
+        <div
+          className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-indigo-600 dark:ring-slate-600 dark:focus-within:ring-slate-500">
           <label
             htmlFor="job-title"
             className="block text-xs font-medium text-gray-900 dark:text-slate-200"
@@ -126,7 +134,11 @@ export default function CurrentGPASection() {
               {errors.currentCredits}
             </label>
           )}
+
+
         </div>
+
+       
       </div>
     </fieldset>
   );
