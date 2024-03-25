@@ -4,7 +4,6 @@ import { calculateGPA, ModuleWithID } from '@utils/gpaCalculator';
 import { ModuleComponent } from '@components/ModuleComponent';
 import { Button } from '../../@components/ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FaShareAlt } from 'react-icons/fa';
 import { FaPlus } from 'react-icons/fa6';
 
 export default function CalculateCGPATab({ school }: { school: School }) {
@@ -15,6 +14,7 @@ export default function CalculateCGPATab({ school }: { school: School }) {
     editModule,
     currentCredits,
     currentGPA,
+    stringifyData
   } = useGPAContext();
 
   // For the add module modal
@@ -26,7 +26,7 @@ export default function CalculateCGPATab({ school }: { school: School }) {
     // Get the default grade and points
     // The default grade is determined by the 3rd key in the grades object (e.g. A+ or 4.7 – Depending on school)
     const defaultGrade = Object.keys(
-      school.grades
+      school.grades,
     )[3] as keyof School['grades'];
 
     addModule({ name: '', grade: defaultGrade, credits: 0 });
@@ -35,6 +35,10 @@ export default function CalculateCGPATab({ school }: { school: School }) {
   const calculatedCGPA = useMemo(() => {
     return calculateGPA(modules, currentGPA || 0, currentCredits || 0, school!);
   }, [modules, currentGPA, currentCredits]);
+
+  const handleShare = () => {
+    console.log(stringifyData());
+  };
 
   return (
     <>
@@ -47,17 +51,7 @@ export default function CalculateCGPATab({ school }: { school: School }) {
         </>
       )}
 
-      <div className={'flex justify-end gap-2'}>
-        <Button
-          disabled={!school}
-          onClick={handleAddModule}
-          size={'sm'}
-          className={'bg-black py-2 text-xs text-white'}
-        >
-          <FaShareAlt className={'mr-2'} />
-          Share
-        </Button>
-      </div>
+
 
       <div className={'my-3 space-y-3'}>
         <AnimatePresence>
