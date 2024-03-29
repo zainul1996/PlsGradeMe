@@ -5,7 +5,7 @@ import { stripLettersFromNumber } from '@utils/stripLettersFromNumber';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { Listbox, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
-import { Button } from '../../@components/ui/button';
+import { Button } from './ui/button';
 
 interface ModuleComponentProps {
   module: ModuleWithID;
