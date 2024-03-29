@@ -9,34 +9,75 @@ import { useGPAContext } from '@components/contexts/GPAContextProvider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { FaShareAlt } from 'react-icons/fa';
+import { Button } from '@components/ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@components/ui/popover';
+import { IoIosCopy } from 'react-icons/io';
+import {
+  EmailIcon,
+  EmailShareButton,
+  RedditIcon,
+  RedditShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from 'react-share';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-  const { school } = useGPAContext();
+  const { school, parseGPAContextState, stringifyGPAContextState } =
+    useGPAContext();
 
-  // Hash JSON Object and add to KV Store, returns uuid
-  // const postData = async () => {
-  //   const response = await fetch('/api/store', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       name: 'John Doe',
-  //       age: 30,
-  //     }),
-  //   });
-  //   const { key } = await response.json();
-  //   console.log('Key:', key);
-  // };
+  const [hash, setHash] = useState<string>('');
+  const shareLink = hash ? `${window.location.origin}?from=${hash}` : null;
 
-  // gets JSON Object from KV Store, given uuid
-  // const getData = async () => {
-  //   const response = await fetch(`/api/store?key=${key}`);
-  //   const data = await response.json();
-  //   console.log('Data:', data);
-  // };
+  /**
+   * Get data from the backend if the ?from query parameter is present (to autofill the form)
+   */
+  useEffect(() => {
+    // Get ?from= query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const from = urlParams.get('from');
+
+    console.log('from', from);
+
+    if (!from) return;
+
+    // Fetch data from backend
+    fetch(`/api/store?hash=${from}`)
+      .then((res) => res.json())
+      .then((d) => {
+        console.log('data', d);
+        parseGPAContextState(JSON.stringify(d));
+      })
+      .catch((e) => {
+        // Show modal or Toast
+        console.log('error', e);
+      });
+  }, []);
+
+  const generateShareLink = () => {
+    fetch('/api/store', {
+      method: 'POST',
+      body: stringifyGPAContextState(),
+    })
+      .then((res) => res.json())
+      .then((d) => {
+        const { hash } = d;
+        console.log('hash', hash);
+        setHash(hash);
+      })
+      .catch((e) => {
+        // Show modal or Toast
+        console.log('error', e);
+      });
+  };
 
   return (
     <>
@@ -136,6 +177,7 @@ export default function Home() {
                       Calculate Target GPA
                     </TabsTrigger>
                   </TabsList>
+
                   <TabsContent value="calculate_cgpa">
                     <div
                       className={'rounded-lg bg-black/20 px-3 py-5 text-white'}
@@ -151,6 +193,80 @@ export default function Home() {
                     </div>
                   </TabsContent>
                 </Tabs>
+
+                {/*POPOVER - Share*/}
+                <div className={'mt-5 flex justify-end gap-2'}>
+                  <Popover>
+                    <PopoverTrigger>
+                      <Button
+                        disabled={!school}
+                        onClick={generateShareLink}
+                        size={'sm'}
+                        className={'bg-black/50 py-2 text-xs text-white'}
+                      >
+                        <FaShareAlt className={'mr-2'} />
+                        Share your results
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent
+                      className={
+                        'w-[250px] rounded-xl border-white/10 bg-gray-900 text-sm drop-shadow'
+                      }
+                    >
+                      {shareLink && (
+                        <>
+                          <label className={'mb-2 block'}>
+                            Share your grades!
+                          </label>
+
+                          <div className={'my-3 flex gap-3'}>
+                            <TelegramShareButton url={shareLink}>
+                              <TelegramIcon size={30} round={true} />
+                            </TelegramShareButton>
+
+                            <WhatsappShareButton url={shareLink}>
+                              <WhatsappIcon size={30} round={true} />
+                            </WhatsappShareButton>
+
+                            <RedditShareButton url={shareLink}>
+                              <RedditIcon size={30} round={true} />
+                            </RedditShareButton>
+
+                            <EmailShareButton url={shareLink}>
+                              <EmailIcon size={30} round={true} />
+                            </EmailShareButton>
+                          </div>
+
+                          {/* Copy Link */}
+                          <div className={'flex'}>
+                            <input
+                              type={'text'}
+                              className={
+                                'inset-0 w-full flex-1 rounded-l-lg border-none bg-white/20 text-xs text-white/50'
+                              }
+                              value={shareLink}
+                            />
+
+                            <button
+                              onClick={() => {
+                                navigator.clipboard.writeText(shareLink);
+                              }}
+                              className={
+                                'rounded-0 rounded-r-lg bg-gray-800 px-2 text-xs text-white hover:bg-gray-500/60'
+                              }
+                            >
+                              <IoIosCopy />
+                            </button>
+                          </div>
+                        </>
+                      )}
+
+                      {!shareLink && (
+                        <label className={'block'}>Generating a link...</label>
+                      )}
+                    </PopoverContent>
+                  </Popover>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
