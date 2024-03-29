@@ -5,7 +5,6 @@ import { ModuleComponent } from '@components/ModuleComponent';
 import { Button } from './ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FaPlus } from 'react-icons/fa6';
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 
 export default function CalculateCGPATab({ school }: { school: School }) {
   const {
@@ -62,19 +61,6 @@ export default function CalculateCGPATab({ school }: { school: School }) {
           <FaShareAlt className={'mr-2'} />
           Share
         </Button> */}
-        <Popover>
-          <PopoverTrigger>
-            <Button
-              disabled={!school}
-              size={'sm'}
-              className={'bg-black py-2 text-xs text-white'}
-            >
-              <FaShareAlt className={'mr-2'} />
-              Share
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent>Place content for the popover here.</PopoverContent>
-        </Popover>
       </div>
 
       <div className={'my-3 space-y-3'}>

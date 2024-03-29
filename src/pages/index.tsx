@@ -8,14 +8,34 @@ import CalculateTargetGPATab from '@components/CalculateTargetGPATab';
 import { useGPAContext } from '@components/contexts/GPAContextProvider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect } from 'react';
-import { Button } from '../../@components/ui/button';
+import { useEffect, useState } from 'react';
 import { FaShareAlt } from 'react-icons/fa';
+import { Button } from '@components/ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@components/ui/popover';
+import { IoIosCopy } from 'react-icons/io';
+import {
+  EmailIcon,
+  EmailShareButton,
+  RedditIcon,
+  RedditShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from 'react-share';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-  const { school, parseGPAContextState } = useGPAContext();
+  const { school, parseGPAContextState, stringifyGPAContextState } =
+    useGPAContext();
+
+  const [hash, setHash] = useState<string>('');
+  const shareLink = hash ? `${window.location.origin}?from=${hash}` : null;
 
   /**
    * Get data from the backend if the ?from query parameter is present (to autofill the form)
@@ -33,14 +53,31 @@ export default function Home() {
     fetch(`/api/store?hash=${from}`)
       .then((res) => res.json())
       .then((d) => {
-        const { data } = d;
-        parseGPAContextState(JSON.stringify(data));
+        console.log('data', d);
+        parseGPAContextState(JSON.stringify(d));
       })
       .catch((e) => {
         // Show modal or Toast
         console.log('error', e);
       });
   }, []);
+
+  const generateShareLink = () => {
+    fetch('/api/store', {
+      method: 'POST',
+      body: stringifyGPAContextState(),
+    })
+      .then((res) => res.json())
+      .then((d) => {
+        const { hash } = d;
+        console.log('hash', hash);
+        setHash(hash);
+      })
+      .catch((e) => {
+        // Show modal or Toast
+        console.log('error', e);
+      });
+  };
 
   return (
     <>
@@ -157,16 +194,74 @@ export default function Home() {
                   </TabsContent>
                 </Tabs>
 
+                {/*POPOVER - Share*/}
                 <div className={'mt-5 flex justify-end gap-2'}>
-                  <Button
-                    disabled={!school}
-                    onClick={() => {}}
-                    size={'sm'}
-                    className={'bg-black/50 py-2 text-xs text-white'}
-                  >
-                    <FaShareAlt className={'mr-2'} />
-                    Share your results
-                  </Button>
+                  <Popover>
+                    <PopoverTrigger>
+                      <Button
+                        disabled={!school}
+                        onClick={generateShareLink}
+                        size={'sm'}
+                        className={'bg-black/50 py-2 text-xs text-white'}
+                      >
+                        <FaShareAlt className={'mr-2'} />
+                        Share your results
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent
+                      className={
+                        'w-[250px] rounded-xl border-white/10 bg-gray-900 text-sm drop-shadow'
+                      }
+                    >
+                      {shareLink && (
+                        <>
+                          <label className={'mb-2 block'}>
+                            Share your grades!
+                          </label>
+
+                          <div className={'my-3 flex gap-3'}>
+                            <TelegramShareButton url={shareLink}>
+                              <TelegramIcon size={30} round={true} />
+                            </TelegramShareButton>
+
+                            <WhatsappShareButton url={shareLink}>
+                              <WhatsappIcon size={30} round={true} />
+                            </WhatsappShareButton>
+
+                            <RedditShareButton url={shareLink}>
+                              <RedditIcon size={30} round={true} />
+                            </RedditShareButton>
+
+                            <EmailShareButton url={shareLink}>
+                              <EmailIcon size={30} round={true} />
+                            </EmailShareButton>
+                          </div>
+
+                          {/* Copy Link */}
+                          <div className={'flex'}>
+                            <input
+                              type={'text'}
+                              className={
+                                'inset-0 w-full flex-1 rounded-l-lg border-none bg-white/20 text-xs text-white/50'
+                              }
+                              value={shareLink}
+                            />
+
+                            <button
+                              onClick={() => {
+                                navigator.clipboard.writeText(shareLink);
+                              }}
+                              className={
+                                'rounded-0 rounded-r-lg bg-gray-800 px-2 text-xs text-white hover:bg-gray-500/60'
+                              }
+                            >
+                              <IoIosCopy />
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </PopoverContent>
+                  </Popover>
                 </div>
               </motion.div>
             )}
