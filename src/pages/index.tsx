@@ -260,6 +260,10 @@ export default function Home() {
                           </div>
                         </>
                       )}
+
+                      {!shareLink && (
+                        <label className={'block'}>Generating a link...</label>
+                      )}
                     </PopoverContent>
                   </Popover>
                 </div>
