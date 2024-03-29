@@ -1,7 +1,13 @@
-import React, { createContext, PropsWithChildren, useContext, useState } from 'react';
+import React, {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useState,
+} from 'react';
 import { Module, ModuleWithID } from '@utils/gpaCalculator';
 import GPAData from '@utils/GPAData';
 import { generateRandomId } from '@utils/generateRandomId';
+import z from 'zod';
 
 interface GPAContextInterface {
   school: School | null;
@@ -23,22 +29,52 @@ interface GPAContextInterface {
   removeModule: (moduleId: string) => void;
 
   //   Data parsers
-  parseData: (data: string) => void;
-  stringifyData: () => string;
+  parseGPAContextState: (data: string) => void;
+  stringifyGPAContextState: () => string;
 }
 
 export type SchoolKeys = keyof typeof GPAData;
-export type School = typeof GPAData[SchoolKeys];
+export type School = (typeof GPAData)[SchoolKeys];
 
 namespace ParsedDataInterface {
-  export interface v1 {
-    school: string | null;
-    currentGPA: number | null;
-    currentCredits: number | null;
-    targetGPA: number | null;
-    targetCredits: number | null;
-    modules: Module[];
-    version: number;
+  export namespace v1 {
+    export const Version = 1;
+    export const Schema = z.object({
+      school: z.string().nullable(),
+      currentGPA: z.number().nullable(),
+      currentCredits: z.number().nullable(),
+      targetGPA: z.number().nullable(),
+      targetCredits: z.number().nullable(),
+      modules: z.array(
+        z.object({
+          name: z.string(),
+          grade: z.string(),
+          credits: z.number(),
+        })
+      ),
+      version: z.number(),
+    });
+
+    export interface Interface {
+      school: string | null;
+      currentGPA: number | null;
+      currentCredits: number | null;
+      targetGPA: number | null;
+      targetCredits: number | null;
+      modules: Module[];
+      version: number;
+    }
+
+    export function Parser(data: any) {
+      return Schema.parse(data);
+    }
+
+    export function Stringify(data: any) {
+      return JSON.stringify({
+        ...data,
+        version: Version,
+      });
+    }
   }
 }
 
@@ -59,8 +95,8 @@ export const useGPAContext = () => {
  * @constructor
  */
 export const GPAContextProvider: React.FC<PropsWithChildren<{}>> = ({
-                                                                      children,
-                                                                    }) => {
+  children,
+}) => {
   // Used for CGPA calculation
   const [school, _setSchool] = useState<School | null>(null);
   const [currentGPA, setCurrentGPA] = useState<number | null>(null);
@@ -109,13 +145,13 @@ export const GPAContextProvider: React.FC<PropsWithChildren<{}>> = ({
     });
   };
 
-  const parseData = (data: string) => {
-
+  const parseGPAContextState = (data: string) => {
     const dataObj = JSON.parse(data);
 
     switch (dataObj.version) {
       case 1:
-        const parsedData = dataObj as ParsedDataInterface.v1;
+        const parsedData = ParsedDataInterface.v1.Parser(dataObj);
+
         if (parsedData.school) {
           setSchool(parsedData.school);
         }
@@ -140,24 +176,22 @@ export const GPAContextProvider: React.FC<PropsWithChildren<{}>> = ({
     }
   };
 
-  const stringifyData = () => {
-    return (
-      JSON.stringify({
-        school: school?.school,
-        currentGPA,
-        currentCredits,
-        targetGPA,
-        targetCredits,
-        modules: modules.map((module) => {
-          return {
-            name: module.name,
-            grade: module.grade,
-            credits: module.credits,
-          };
-        }),
-        version: 1,
-      })
-    );
+  const stringifyGPAContextState = () => {
+    return JSON.stringify({
+      school: school?.school,
+      currentGPA,
+      currentCredits,
+      targetGPA,
+      targetCredits,
+      modules: modules.map((module) => {
+        return {
+          name: module.name,
+          grade: module.grade,
+          credits: module.credits,
+        };
+      }),
+      version: 1,
+    });
   };
 
   // console.log('[DEBUG - GPACONTEXTPROVIDER] school', school);
@@ -182,8 +216,8 @@ export const GPAContextProvider: React.FC<PropsWithChildren<{}>> = ({
         removeModule,
         targetGPA,
         targetCredits,
-        parseData,
-        stringifyData,
+        parseGPAContextState,
+        stringifyGPAContextState,
       }}
     >
       {children}

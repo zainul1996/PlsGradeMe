@@ -14,7 +14,7 @@ export default function CalculateCGPATab({ school }: { school: School }) {
     editModule,
     currentCredits,
     currentGPA,
-    stringifyData
+    stringifyGPAContextState,
   } = useGPAContext();
 
   // For the add module modal
@@ -26,7 +26,7 @@ export default function CalculateCGPATab({ school }: { school: School }) {
     // Get the default grade and points
     // The default grade is determined by the 3rd key in the grades object (e.g. A+ or 4.7 – Depending on school)
     const defaultGrade = Object.keys(
-      school.grades,
+      school.grades
     )[3] as keyof School['grades'];
 
     addModule({ name: '', grade: defaultGrade, credits: 0 });
@@ -37,7 +37,7 @@ export default function CalculateCGPATab({ school }: { school: School }) {
   }, [modules, currentGPA, currentCredits]);
 
   const handleShare = () => {
-    console.log(stringifyData());
+    console.log(stringifyGPAContextState());
   };
 
   return (
@@ -50,8 +50,6 @@ export default function CalculateCGPATab({ school }: { school: School }) {
           </p>
         </>
       )}
-
-
 
       <div className={'my-3 space-y-3'}>
         <AnimatePresence>

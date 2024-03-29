@@ -8,17 +8,17 @@ import CalculateTargetGPATab from '@components/CalculateTargetGPATab';
 import { useGPAContext } from '@components/contexts/GPAContextProvider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Button } from '../../@components/ui/button';
 import { FaShareAlt } from 'react-icons/fa';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-  const { school, parseData } = useGPAContext();
+  const { school, parseGPAContextState } = useGPAContext();
 
   /**
-   * Get data from the backend if the ?from query parameter is present (to auto-fill the form)
+   * Get data from the backend if the ?from query parameter is present (to autofill the form)
    */
   useEffect(() => {
     // Get ?from= query parameter
@@ -31,19 +31,15 @@ export default function Home() {
 
     // Fetch data from backend
     fetch(`/api/store?hash=${from}`)
-      .then(res => res.json())
-      .then(d => {
-
-        const {data} = d
-        parseData(JSON.stringify(data))
-
-      //   Remove the 'from' query parameter from the URL
-        window.history.replaceState({}, document.title, window.location.pathname);
+      .then((res) => res.json())
+      .then((d) => {
+        const { data } = d;
+        parseGPAContextState(JSON.stringify(data));
       })
-      .catch(e => {
+      .catch((e) => {
         // Show modal or Toast
-        console.log('error', e)
-      })
+        console.log('error', e);
+      });
   }, []);
 
   return (
@@ -132,8 +128,6 @@ export default function Home() {
                 exit="hidden"
                 className="mt-6 w-full rounded-md bg-slate-800 p-4 text-foreground"
               >
-
-
                 <Tabs defaultValue="calculate_cgpa" className="mx-auto">
                   <TabsList className="flex justify-evenly bg-black/20">
                     <TabsTrigger
@@ -145,8 +139,6 @@ export default function Home() {
                     <TabsTrigger value="calculate_target_gpa" className={''}>
                       Calculate Target GPA
                     </TabsTrigger>
-
-
                   </TabsList>
 
                   <TabsContent value="calculate_cgpa">
@@ -165,11 +157,10 @@ export default function Home() {
                   </TabsContent>
                 </Tabs>
 
-                <div className={'flex justify-end gap-2 mt-5'}>
+                <div className={'mt-5 flex justify-end gap-2'}>
                   <Button
                     disabled={!school}
-                    onClick={() => {
-                    }}
+                    onClick={() => {}}
                     size={'sm'}
                     className={'bg-black/50 py-2 text-xs text-white'}
                   >
@@ -177,8 +168,6 @@ export default function Home() {
                     Share your results
                   </Button>
                 </div>
-
-
               </motion.div>
             )}
           </AnimatePresence>
